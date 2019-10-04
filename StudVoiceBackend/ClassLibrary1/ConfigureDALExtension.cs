@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StudVoice.DAL.Repositories.ImplementedRepositories;
+using StudVoice.DAL.Repositories.InterfacesRepositories;
 
 
 namespace StudVoice.DAL
@@ -16,13 +18,24 @@ namespace StudVoice.DAL
             this IServiceCollection services,
             IConfiguration configuration)
         {
-
+            services.ConfigureRepositories();
             services.ConfigureDbContext(configuration);
             services.ConfigureIdentity();
 
         }
 
-
+        private static void ConfigureRepositories(this IServiceCollection services)
+        {
+            services.AddScoped <IContactRepository, ContactRepository> ();
+            services.AddScoped <IFacultyRepository, FacultyRepository> ();
+            services.AddScoped <ILessonRepository, LessonRepository> ();
+            services.AddScoped <ILessonFeedbackRepository, LessonFeedbackRepository> ();
+            services.AddScoped <ITeacherRepository, TeacherRepository> ();
+            services.AddScoped <ITeacherFeedbackRepository, TeacherFeedbackRepository> ();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<UserManager<User>>();
+            services.AddScoped<RoleManager<Role>>();
+        }
 
         private static void ConfigureDbContext(
             this IServiceCollection services,
