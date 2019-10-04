@@ -25,12 +25,26 @@ namespace StudVoice.DAL.Models.EntityConfiguration
                 .ValueGeneratedNever();
 
             builder.Property(e => e.Email)
-                .IsRequired()
-                .HasMaxLength(1);
+                .IsRequired();
 
             builder.Property(e => e.Phone)
-                .IsRequired()
-                .HasMaxLength(1);
+                .IsRequired();
+
+            builder.Property(e => e.CreatedDate)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            builder.Property(e => e.UpdatedDate)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            builder.HasOne(u => u.Create)
+                .WithMany(u => u.ContactCreate)
+                .HasForeignKey(u => u.CreatedById);
+
+            builder.HasOne(u => u.Mod)
+                .WithMany(u => u.ContactMod)
+                .HasForeignKey(u => u.UpdatedById);
         }
     }
 }

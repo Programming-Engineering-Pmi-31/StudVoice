@@ -18,8 +18,7 @@ namespace StudVoice.DAL.Models.EntityConfiguration
                 .ValueGeneratedNever();
 
             builder.Property(e => e.Feedback)
-                .IsRequired()
-                .HasMaxLength(1);
+                .IsRequired();
 
             builder.Property(e => e.LessonId).HasColumnName("LessonID");
 
@@ -27,6 +26,14 @@ namespace StudVoice.DAL.Models.EntityConfiguration
                 .WithMany(p => p.LessonFeedbacks)
                 .HasForeignKey(d => d.LessonId)
                 .HasConstraintName("FK__LessonFee__Lesso__398D8EEE");
+
+            builder.HasOne(u => u.Create)
+                .WithMany(u => u.LessonFeedbackCreate)
+                .HasForeignKey(u => u.CreatedById);
+
+            builder.HasOne(u => u.Mod)
+                .WithMany(u => u.LessonFeedbackMod)
+                .HasForeignKey(u => u.UpdatedById);
         }
     }
 }

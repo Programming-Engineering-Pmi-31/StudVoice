@@ -17,12 +17,10 @@ namespace StudVoice.DAL.Models.EntityConfiguration
 
             builder.Property(e => e.Id)
                 .HasColumnName("ID")
-                .HasMaxLength(1)
                 .ValueGeneratedNever();
 
             builder.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(1);
+                .IsRequired();
         }
     }
 }

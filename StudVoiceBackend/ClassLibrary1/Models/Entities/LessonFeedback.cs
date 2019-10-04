@@ -16,5 +16,8 @@ namespace StudVoice.DAL
         public string UpdatedById { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
+
+        public virtual User Create { get; set; }
+        public virtual User Mod { get; set; }
     }
 }

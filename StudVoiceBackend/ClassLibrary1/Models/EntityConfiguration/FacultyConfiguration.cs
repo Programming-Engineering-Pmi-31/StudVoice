@@ -22,8 +22,15 @@ namespace StudVoice.DAL.Models.EntityConfiguration
                 .ValueGeneratedNever();
 
             builder.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(1);
+                .IsRequired();
+
+            builder.HasOne(u => u.Create)
+                .WithMany(u => u.FacultyCreate)
+                .HasForeignKey(u => u.CreatedById);
+
+            builder.HasOne(u => u.Mod)
+                .WithMany(u => u.FacultyMod)
+                .HasForeignKey(u => u.UpdatedById);
         }
     }
 }
