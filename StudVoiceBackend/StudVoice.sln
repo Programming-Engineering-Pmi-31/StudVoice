@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28306.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudVoice.API", "StudVoice\StudVoice.API.csproj", "{7EB44AF3-DE9A-442E-9A32-2DAD073DED3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudVoice.API", "StudVoice\StudVoice.API.csproj", "{7EB44AF3-DE9A-442E-9A32-2DAD073DED3C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8FBEC3AA-A11A-4A6A-AE73-C2C5E5E72C02} = {8FBEC3AA-A11A-4A6A-AE73-C2C5E5E72C02}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudVoice.DAL", "ClassLibrary1\StudVoice.DAL.csproj", "{AC5F7B91-A889-47F2-BB79-702140B61DA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudVoice.DAL", "ClassLibrary1\StudVoice.DAL.csproj", "{AC5F7B91-A889-47F2-BB79-702140B61DA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudVoice.BLL", "StudVoice.BLL\StudVoice.BLL.csproj", "{8FBEC3AA-A11A-4A6A-AE73-C2C5E5E72C02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudVoice.BLL", "StudVoice.BLL\StudVoice.BLL.csproj", "{8FBEC3AA-A11A-4A6A-AE73-C2C5E5E72C02}"
 	ProjectSection(ProjectDependencies) = postProject
 		{AC5F7B91-A889-47F2-BB79-702140B61DA6} = {AC5F7B91-A889-47F2-BB79-702140B61DA6}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudVoice.XUnitTest", "StudVoice.XUnitTest\StudVoice.XUnitTest.csproj", "{F4EE8E5A-3573-4308-BBE2-48C6628F1DA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{8FBEC3AA-A11A-4A6A-AE73-C2C5E5E72C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FBEC3AA-A11A-4A6A-AE73-C2C5E5E72C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FBEC3AA-A11A-4A6A-AE73-C2C5E5E72C02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4EE8E5A-3573-4308-BBE2-48C6628F1DA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4EE8E5A-3573-4308-BBE2-48C6628F1DA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4EE8E5A-3573-4308-BBE2-48C6628F1DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4EE8E5A-3573-4308-BBE2-48C6628F1DA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
