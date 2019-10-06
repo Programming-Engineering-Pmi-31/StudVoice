@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StudVoice.DAL.Repositories.ImplementedRepositories;
 using StudVoice.DAL.Repositories.InterfacesRepositories;
+using StudVoice.DAL.UnitOfWork;
 
 
 namespace StudVoice.DAL
@@ -22,6 +23,7 @@ namespace StudVoice.DAL
             services.ConfigureDbContext(configuration);
             services.ConfigureIdentity();
 
+            services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
         }
 
         private static void ConfigureRepositories(this IServiceCollection services)
