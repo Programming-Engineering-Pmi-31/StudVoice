@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,7 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using StudVoice.API.Extensions;
+using StudVoice.EndpointFilters.OnActionExecuting;
 
 namespace StudVoice
 {
@@ -27,7 +30,19 @@ namespace StudVoice
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureApplication(Configuration);
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSignalR();
+            services.ConfigureAuthentication(Configuration);
+            services.ConfigureCors();
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(SetCurrentUserAttribute));
+                options.Filters.Add(typeof(ValidateModelStateAttribute));
+            })
+                .AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

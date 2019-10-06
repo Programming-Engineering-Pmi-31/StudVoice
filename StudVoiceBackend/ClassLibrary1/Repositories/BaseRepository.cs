@@ -10,7 +10,7 @@ using StudVoice.DAL.Models.Entities.Abstractions;
 
 namespace StudVoice.DAL.Repositories
 {
-    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity>, IQueryRepository<TEntity>
+    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity>
             where TEntity : class, IAuditableEntity, IBaseEntity
     {
         private readonly StudVoiceDBContext _context;

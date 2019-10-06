@@ -1,7 +1,11 @@
-﻿namespace StudVoice.DAL.Repositories.ImplementedRepositories
+﻿using StudVoice.DAL.Repositories.InterfacesRepositories;
+
+namespace StudVoice.DAL.Repositories.ImplementedRepositories
 {
-    public class ContactRepository
+    public class ContactRepository : BaseRepository<Contact>, IContactRepository
     {
-        
+        public ContactRepository(StudVoiceDBContext context) : base(context)
+        {
+        }
     }
 }

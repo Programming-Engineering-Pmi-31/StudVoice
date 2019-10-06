@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace StudVoice.DAL.Repositories
 {
-    public interface IBaseRepository<TEntity> : IQueryRepository<TEntity> where TEntity : class
+    public interface IBaseRepository<TEntity> where TEntity : class
     {
         Task<TEntity> GetByIdAsync(int id);
         Task<List<TEntity>> GetAllAsync();

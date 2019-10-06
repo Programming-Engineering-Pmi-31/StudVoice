@@ -1,6 +1,6 @@
 ﻿namespace StudVoice.DAL.Repositories.InterfacesRepositories
 {
-    public interface IContactRepository
+    public interface IContactRepository : IBaseRepository<Contact>
     {
         
     }
