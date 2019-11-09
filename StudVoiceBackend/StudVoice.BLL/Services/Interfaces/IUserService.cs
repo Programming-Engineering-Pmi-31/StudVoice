@@ -7,7 +7,7 @@ namespace StudVoice.BLL.Services.Interfaces
     public interface IUserService
     {
         Task<UserDTO> UpdatePasswordAsync(UserDTO user, string newPassword);
-        Task<IEnumerable<UserDTO>> GetAssignees(uint offset, uint amount);
+        Task<IEnumerable<UserDTO>> GetStudents(uint offset, uint amount);
         Task<UserDTO> GetAsync(string id);
         Task<IEnumerable<UserDTO>> GetRangeAsync(uint offset, uint amount);
         Task<UserDTO> CreateAsync(UserDTO value);

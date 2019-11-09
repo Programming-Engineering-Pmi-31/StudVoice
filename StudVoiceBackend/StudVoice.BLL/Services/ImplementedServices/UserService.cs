@@ -64,9 +64,12 @@ namespace StudVoice.BLL.Services.ImplementedServices
             return result.Succeeded ? user : null;
         }
 
-        public Task<IEnumerable<UserDTO>> GetAssignees(uint offset, uint amount)
+        public virtual async Task<IEnumerable<UserDTO>> GetStudents(uint offset, uint amount)
         {
-            throw new System.NotImplementedException();
+            IEnumerable<User> students = (await _unitOfWork.UserManager.GetUsersInRoleAsync(RoleNames.Student))
+                .Skip((int)offset)
+                .Take((int)amount);
+            return _mapper.Map<IEnumerable<UserDTO>>(students);
         }
 
         public async Task<UserDTO> GetAsync(string id)
