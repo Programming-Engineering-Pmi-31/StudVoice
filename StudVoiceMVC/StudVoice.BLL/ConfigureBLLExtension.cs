@@ -18,7 +18,7 @@ namespace StudVoice.BLL
 
             services.AddScoped<IServiceFactory, ServiceFactory>();
 
-            services.ConfigureDAL(configuration);
+            //services.ConfigureAll();
         }
 
         private static void ConfigureServices(this IServiceCollection services)
