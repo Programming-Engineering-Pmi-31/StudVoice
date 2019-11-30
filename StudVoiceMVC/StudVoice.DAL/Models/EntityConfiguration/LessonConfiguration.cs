@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
@@ -18,6 +15,15 @@ namespace StudVoice.DAL.Models.EntityConfiguration
                 .ValueGeneratedNever();
 
             builder.Property(e => e.Name)
+                .IsRequired();
+
+            builder.Property(e => e.DateTime)
+                .IsRequired();
+
+            builder.Property(e => e.Description)
+                .HasMaxLength(2000);
+
+            builder.Property(e => e.Theme)
                 .IsRequired();
 
             builder.Property(e => e.TeacherId).HasColumnName("TeacherID");

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using StudVoice.DAL.Repositories.InterfacesRepositories;
+﻿using StudVoice.DAL.Repositories.InterfacesRepositories;
 
 namespace StudVoice.DAL.Repositories.ImplementedRepositories
 {
