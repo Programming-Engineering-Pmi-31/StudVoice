@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Cryptography;
 using System.Text;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace StudVoiceMVC.Controllers
 {
@@ -27,6 +29,12 @@ namespace StudVoiceMVC.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public bool IsValid(string strIn)
+        {
+            // Return true if strIn is in valid e-mail format.
+            return Regex.IsMatch(strIn, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
         }
 
         [AllowAnonymous]
@@ -45,6 +53,11 @@ namespace StudVoiceMVC.Controllers
                 User user = null;
                 using (StudVoiceContext db = new StudVoiceContext())
                 {
+                    if(!IsValid(loginDTO.Login))
+                    {
+                        ModelState.AddModelError("Login", "Invalid email.");
+                        return View(loginDTO);
+                    }
                     var md5 = new MD5CryptoServiceProvider();
                     var data = Encoding.ASCII.GetBytes(loginDTO.Password);
                     var md5data = md5.ComputeHash(data);
@@ -57,6 +70,7 @@ namespace StudVoiceMVC.Controllers
                     else
                     {
                         ModelState.AddModelError("Password", "Invalid email or password.");
+                        return View(loginDTO);
                     }
                 }
                 if (user != null)
@@ -71,9 +85,10 @@ namespace StudVoiceMVC.Controllers
                 else
                 {
                     ModelState.AddModelError("Password", "Invalid email or password.");
+                    return View(loginDTO);
                 }
             }
-            return View();
+            return View(loginDTO);
         }
 
         [HttpPost]
@@ -104,6 +119,11 @@ namespace StudVoiceMVC.Controllers
                 User user = null;
                 using (StudVoiceContext db = new StudVoiceContext())
                 {
+                    if (!IsValid(registerTeacher.Email))
+                    {
+                        ModelState.AddModelError("Email", "Invalid email.");
+                        return View(registerTeacher);
+                    }
                     var us = db.Users.FirstOrDefault(u => u.Contact.Email == registerTeacher.Email);
                     var id = db.Faculties.Where(x => x.Name == registerTeacher.Faculty).Select(x => x.Id).FirstOrDefault();
                     if (us!=null)
@@ -166,6 +186,11 @@ namespace StudVoiceMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!IsValid(registerStudent.Email))
+                {
+                    ModelState.AddModelError("Email", "Invalid email.");
+                    return View(registerStudent);
+                }
                 User user = null;
                 using (StudVoiceContext db = new StudVoiceContext())
                 {
