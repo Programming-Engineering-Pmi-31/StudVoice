@@ -20,6 +20,10 @@ namespace StudVoice.BLL.DTOs
         public string Email { get; set; }
 
         [Required]
+        public string ContactPhone { get; set; }
+
+
+        [Required]
         public string Faculty { get; set; }
 
         [Required]

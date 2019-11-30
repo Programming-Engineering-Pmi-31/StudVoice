@@ -17,10 +17,12 @@ namespace StudVoice.BLL.DTOs
         public string Patronym { get; set; }//по батькові
 
         [Required]
-        public string Email { get; set; }
+        public string Faculty { get; set; }
 
         [Required]
-        public string IdNumber { get; set; }
+        public string Email { get; set; }
+        [Required]
+        public string ContactPhone { get; set; }
 
         [Required]
         public string Password { get; set; }

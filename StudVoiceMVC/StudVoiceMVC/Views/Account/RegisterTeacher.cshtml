@@ -1,7 +1,6 @@
 ﻿
 @{
     ViewData["Title"] = "RegisterTeacher";
-    Layout = null;
 }
 
 <h1>RegisterTeacher</h1>
@@ -47,9 +46,27 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(model => model.ContactPhone, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ContactPhone)
+            @Html.ValidationMessageFor(model => model.ContactPhone)
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(model => model.Faculty, new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Faculty)
+            <select name="Faculty" id="listbox">
+                @using (StudVoiceContext db = new StudVoiceContext())
+                {
+                    @foreach (var item in db.Faculties)
+                    {
+                        <option value="@item.Name">
+                            @item.Name
+                        </option>
+                    }
+                }
+            </select>
+
             @Html.ValidationMessageFor(model => model.Faculty)
         </div>
     </div>
@@ -80,7 +97,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Зарегистрировать" class="btn btn-default" />
+            <input type="submit" value="Register" class="btn btn-default" />
         </div>
     </div>
 </div>

@@ -17,6 +17,7 @@ namespace StudVoiceMVC
         public string MiddleName { get; set; }
         public int? ContactId { get; set; }
         public int? FacultyId { get; set; }
+        public string Password { get; set; }
 
         public virtual Contacts Contact { get; set; }
         public virtual Faculties Faculty { get; set; }
