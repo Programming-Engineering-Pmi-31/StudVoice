@@ -17,6 +17,15 @@ namespace StudVoice.DAL.Models.EntityConfiguration
             builder.Property(e => e.Name)
                 .IsRequired();
 
+            builder.Property(e => e.DateTime)
+                .IsRequired();
+
+            builder.Property(e => e.Description)
+                .HasMaxLength(2000);
+
+            builder.Property(e => e.Theme)
+                .IsRequired();
+
             builder.Property(e => e.TeacherId).HasColumnName("TeacherID");
 
             builder.HasOne(d => d.Teacher)
