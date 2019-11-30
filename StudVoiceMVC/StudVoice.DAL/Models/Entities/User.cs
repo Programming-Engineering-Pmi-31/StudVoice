@@ -55,5 +55,15 @@ namespace StudVoice.DAL
         public virtual ICollection<Teacher> TeacherMod { get; set; }
         public virtual ICollection<TeacherFeedback> TeacherFeedbackCreate { get; set; }
         public virtual ICollection<TeacherFeedback> TeacherFeedbackMod { get; set; }
+
+
+        public User(string name,string surname,string middlename, int contactId, int facultyId)
+        {
+            Name = name;
+            Surname = surname;
+            MiddleName = middlename;
+            ContactId = contactId;
+            FacultyId = facultyId;
+        }
     }
 }

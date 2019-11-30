@@ -30,6 +30,10 @@ namespace StudVoice.DAL.UnitOfWork
 
         private RoleManager<Role> _roleManager;
 
+        public UnitOfWork()
+        {
+        }
+
         public UnitOfWork(StudVoiceDBContext context,
             IServiceProvider serviceProvider)
         {

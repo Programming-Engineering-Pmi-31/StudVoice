@@ -1,4 +1,5 @@
-﻿using StudVoice.DAL.Repositories.InterfacesRepositories;
+﻿using System.Collections.Generic;
+using StudVoice.DAL.Repositories.InterfacesRepositories;
 
 namespace StudVoice.DAL.Repositories.ImplementedRepositories
 {
@@ -15,6 +16,11 @@ namespace StudVoice.DAL.Repositories.ImplementedRepositories
         {
             get => _dbContext.CurrentUserId;
             set => _dbContext.CurrentUserId = value;
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            return _dbContext.Users;
         }
     }
 }
