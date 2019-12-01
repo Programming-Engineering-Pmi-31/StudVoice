@@ -1,3 +1,5 @@
+using System;
+
 namespace StudVoiceMVC.Models
 {
     public class ErrorViewModel

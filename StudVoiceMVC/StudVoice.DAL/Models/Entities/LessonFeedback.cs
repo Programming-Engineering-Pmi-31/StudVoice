@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using StudVoice.DAL.Models.Entities.Abstractions;
 
 namespace StudVoice.DAL
