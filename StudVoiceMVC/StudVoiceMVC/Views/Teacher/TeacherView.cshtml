@@ -22,19 +22,19 @@
             </div>
             <div class="col-sm-1">
                 <label>Lessons:</label>
-            </div>
-            <div class="col-md-4">
-               <ul>
-                   @foreach (var item in Model.Lessons)
-                   {
-                       <li>
-                           <a class="nav-item text-dark" asp-controller="Home" asp-action="Lesson" asp->
-                               <span>@item.Name</span>
-                               <span>@item.DateTime</span>
-                           </a>
-                       </li>
-                   }
-               </ul>
+                <div class="col-md-4">
+                    <ul>
+                        @foreach (var item in Model.Lessons)
+                        {
+                            <li>
+                                <a class="nav-item text-dark" asp-controller="Home" asp-action="Lesson" asp->
+                                    <span>@item.Name</span>
+                                    <span>@item.DateTime</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="row">
