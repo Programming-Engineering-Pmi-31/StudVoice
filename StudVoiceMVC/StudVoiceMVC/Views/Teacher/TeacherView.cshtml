@@ -24,7 +24,7 @@
                 <label>Id:</label>
             </div>
             <div class="col-6">
-                @Html.DisplayNameFor(model => model.Id)
+                @Model.Id
             </div>
         </div>
         <div class="row">
@@ -32,7 +32,7 @@
                 <label>Name:</label>
             </div>
             <div class="col-6">
-                @Html.DisplayNameFor(model => model.Name)
+                @Model.Name
             </div>
         </div>
     </div>
@@ -44,7 +44,7 @@
                     @foreach (var item in Model.Lessons)
                     {
                         <li class=" list-group-item">
-                            <a class="nav-item text-dark" asp-controller="Home" asp-action="Lesson">
+                            <a class="nav-item text-dark" href="#" onclick="location.href='@Url.Action("Lesson","Home",new { Id = item.Id })'">
                                 <span>@item.Name</span>
                                 <span>@item.DateTime</span>
                             </a>

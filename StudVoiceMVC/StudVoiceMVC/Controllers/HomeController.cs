@@ -38,8 +38,7 @@ namespace StudVoiceMVC.Controllers
 
         public async Task<IActionResult> Teacher(int id)
         {
-            var res = await _teacherService.GetAsync(id);
-            return View("~/Views/Teacher/TeacherView.cshtml",res);
+            return View("~/Views/Teacher/TeacherView.cshtml", await _teacherService.GetAsync(id));
         }
 
         public IActionResult CreateLesson()
@@ -47,9 +46,10 @@ namespace StudVoiceMVC.Controllers
             return View("~/Views/Teacher/Lesson/CreateLessonView.cshtml");
         }
        
-        public IActionResult Lesson(int id)
-        {   
-            return View("~/Views/Teacher/Lesson/LessonView.cshtml", _lessonService.GetAsync(id));
+        public async Task<IActionResult> Lesson(int id)
+        {
+            var res = await _lessonService.GetAsync(id);
+            return View("~/Views/Teacher/Lesson/LessonView.cshtml",res);
         }
 
         [HttpPost]
