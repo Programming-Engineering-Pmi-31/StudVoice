@@ -1,2 +1,27 @@
 ﻿@import "variables.scss";
 
+.teacher-header {
+    height: 10%;
+    margin: 3% 0%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.teacher-container {
+    height: 80%;
+
+    .teacher-lessons, .teacher-feedbacks {
+        max-height: 50%;
+    }
+
+    .teacher-lessons {
+        display: flex;
+        flex-direction: column;
+
+        .lessons-container, feedback-container {
+            overflow-y: auto;
+            margin-bottom: 5%;
+        }
+    }
+}

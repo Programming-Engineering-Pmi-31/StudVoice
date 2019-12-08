@@ -4,66 +4,70 @@
     ViewData["Title"] = "TeacherView";
 }
 
-<h1>TeacherView</h1>
-
-<div>
+<div class="teacher-header">
+    <a  asp-action="Index" asp-controller="Home">
+        <img src="~/Content/images/back.svg" width="30px" />
+    </a>
     <h4>Teacher</h4>
-    <hr />
-    <div class="container">
+</div>
+
+<hr />
+
+<div class="container row teacher-container">
+    <div class="col-4">
         <div class="row">
-            <div class="col-sm-2">
-                <label> Photo</label>
-            </div>
-            <div class="col-sm-4">
-                <img src="~/Content/images/avatar.png" width="300" height="200" />
-            </div>
-            <div class="col-md-2">
-                <a class="nav-item text-dark" asp-area="" asp-controller="Home" asp-action="CreateLesson">CreateLesson</a>
-            </div>
-            <div class="col-sm-1">
-                <label>Lessons:</label>
-                <div class="col-md-4">
-                    <ul>
-                        @foreach (var item in Model.Lessons)
-                        {
-                            <li>
-                                <a class="nav-item text-dark" href="#" onclick="location.href='@Url.Action("Lesson","Home",item)'">
-                                    <span>@item.Name</span>
-                                    <span>@item.DateTime</span>
-                                </a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
+            <img src="~/Content/images/avatar.png" />
         </div>
+        </br>
         <div class="row">
-            <div class="col-md-2">
-                <label>Id</label>
+            <div class="col-6">
+                <label>Id:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-6">
                 @Html.DisplayNameFor(model => model.Id)
             </div>
-            <div class="col-sm-2">
-                <label>Feedbacks</label>
-            </div>
-            <div class="col-md-6">
-                <datalist>
-                    @Html.DisplayNameFor(model => model.TeacherFeedBacks)
-                </datalist>
-            </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
-                <label>Name</label>
+            <div class="col-6">
+                <label>Name:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-6">
                 @Html.DisplayNameFor(model => model.Name)
             </div>
         </div>
     </div>
-</div>
-<div>
-    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>*@ |
-    <a asp-action="Index">Back</a>
+    <div class="col-8 h-100">
+        <div class="teacher-lessons">
+            <label class="card-title w-100">Lessons:</label>
+            <div class="lessons-container">
+                <ul class="list-group">
+                    @foreach (var item in Model.Lessons)
+                    {
+                        <li class=" list-group-item">
+                            <a class="nav-item text-dark" asp-controller="Home" asp-action="Lesson">
+                                <span>@item.Name</span>
+                                <span>@item.DateTime</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="teacher-feedbacks">
+            <label>Feedbacks:</label>
+            <div class="feedback-container">
+                <ul class="list-group">
+                    @foreach (var item in Model.TeacherFeedBacks)
+                    {
+                        <li class=" list-group-item">
+                            <a class="nav-item text-dark" asp-controller="Home" asp-action="Feedback">
+                                <span class="col-9">@item.Feedback</span>
+                                <span class="col-2">Point: @item.Point / 100</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
