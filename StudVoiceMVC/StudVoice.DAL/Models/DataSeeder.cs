@@ -191,25 +191,25 @@ namespace StudVoice.DAL
             #endregion
 
             #region Lessons
-            context.Lessons.Add(new Lesson { Theme = "Theme1", Id = 1, TeacherId = 1, Name = "Lesson1" });
-            context.Lessons.Add(new Lesson { Theme = "Theme2", Id = 2, TeacherId = 2, Name = "Lesson2" });
-            context.Lessons.Add(new Lesson { Theme = "Theme3", Id = 3, TeacherId = 3, Name = "Lesson3" });
-            context.Lessons.Add(new Lesson { Theme = "Theme4", Id = 4, TeacherId = 1, Name = "Lesson4" });
-            context.Lessons.Add(new Lesson { Theme = "Theme5", Id = 5, TeacherId = 2, Name = "Lesson5" });
-            context.Lessons.Add(new Lesson { Theme = "Theme6", Id = 6, TeacherId = 3, Name = "Lesson6" });
-            context.Lessons.Add(new Lesson { Theme = "Theme3", Id = 7, TeacherId = 1, Name = "Lesson7" });
-            context.Lessons.Add(new Lesson { Theme = "Them2", Id = 8, TeacherId = 2, Name = "Lesson8" });
-            context.Lessons.Add(new Lesson { Theme = "Theme2", Id = 9, TeacherId = 3, Name = "Lesson9" });
-            context.Lessons.Add(new Lesson { Theme = "Theme1", Id = 10, TeacherId = 1, Name = "Lesson10" });
-            context.Lessons.Add(new Lesson { Theme = "Theme2", Id = 11, TeacherId = 1, Name = "Lesson11" });
-            context.Lessons.Add(new Lesson { Theme = "Theme6", Id = 12, TeacherId = 2, Name = "Lesson12" });
-            context.Lessons.Add(new Lesson { Theme = "Theme7", Id = 13, TeacherId = 3, Name = "Lesson13" });
-            context.Lessons.Add(new Lesson { Theme = "Theme8", Id = 14, TeacherId = 1, Name = "Lesson14" });
-            context.Lessons.Add(new Lesson { Theme = "Theme9", Id = 15, TeacherId = 2, Name = "Lesson15" });
-            context.Lessons.Add(new Lesson { Theme = "Theme10", Id = 16, TeacherId = 1, Name = "Lesson16" });
-            context.Lessons.Add(new Lesson { Theme = "Theme11", Id = 17, TeacherId = 1, Name = "Lesson17" });
-            context.Lessons.Add(new Lesson { Theme = "Theme1", Id = 18, TeacherId = 2, Name = "Lesson18" });
-            context.Lessons.Add(new Lesson { Theme = "Theme12", Id = 19, TeacherId = 3, Name = "Lesson19" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 1", Theme = "Theme1", Id = 1, TeacherId = 1, Name = "Lesson1" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 2", Theme = "Theme2", Id = 2, TeacherId = 2, Name = "Lesson2" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 3", Theme = "Theme3", Id = 3, TeacherId = 3, Name = "Lesson3" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 4", Theme = "Theme4", Id = 4, TeacherId = 1, Name = "Lesson4" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 5", Theme = "Theme5", Id = 5, TeacherId = 2, Name = "Lesson5" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 6", Theme = "Theme6", Id = 6, TeacherId = 3, Name = "Lesson6" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 7", Theme = "Theme3", Id = 7, TeacherId = 1, Name = "Lesson7" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 8", Theme = "Them2", Id = 8, TeacherId = 2, Name = "Lesson8" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 9", Theme = "Theme2", Id = 9, TeacherId = 3, Name = "Lesson9" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 10", Theme = "Theme1", Id = 10, TeacherId = 1, Name = "Lesson10" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 11", Theme = "Theme2", Id = 11, TeacherId = 1, Name = "Lesson11" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 12", Theme = "Theme6", Id = 12, TeacherId = 2, Name = "Lesson12" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 13", Theme = "Theme7", Id = 13, TeacherId = 3, Name = "Lesson13" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 14", Theme = "Theme8", Id = 14, TeacherId = 1, Name = "Lesson14" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 15", Theme = "Theme9", Id = 15, TeacherId = 2, Name = "Lesson15" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 16", Theme = "Theme10", Id = 16, TeacherId = 1, Name = "Lesson16" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 17", Theme = "Theme11", Id = 17, TeacherId = 1, Name = "Lesson17" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 18", Theme = "Theme1", Id = 18, TeacherId = 2, Name = "Lesson18" });
+            context.Lessons.Add(new Lesson { Description = "Description, descr, des, de 19", Theme = "Theme12", Id = 19, TeacherId = 3, Name = "Lesson19" });
             #endregion
 
             #region LessonFeedbacks
