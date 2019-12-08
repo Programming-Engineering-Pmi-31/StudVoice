@@ -27,7 +27,7 @@
                         @foreach (var item in Model.Lessons)
                         {
                             <li>
-                                <a class="nav-item text-dark" asp-controller="Home" asp-action="Lesson" asp->
+                                <a class="nav-item text-dark" href="#" onclick="location.href='@Url.Action("Lesson","Home",item)'">
                                     <span>@item.Name</span>
                                     <span>@item.DateTime</span>
                                 </a>
