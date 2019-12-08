@@ -1,0 +1,16 @@
+C:\StudVoice\StudVoiceMVC\StudVoice.DAL\bin\Debug\netcoreapp2.2\StudVoice.DAL.deps.json
+C:\StudVoice\StudVoiceMVC\StudVoice.DAL\bin\Debug\netcoreapp2.2\StudVoice.DAL.dll
+C:\StudVoice\StudVoiceMVC\StudVoice.DAL\bin\Debug\netcoreapp2.2\StudVoice.DAL.pdb
+C:\StudVoice\StudVoiceMVC\StudVoice.DAL\obj\Debug\netcoreapp2.2\StudVoice.DAL.csprojAssemblyReference.cache
+C:\StudVoice\StudVoiceMVC\StudVoice.DAL\obj\Debug\netcoreapp2.2\StudVoice.DAL.AssemblyInfoInputs.cache
+C:\StudVoice\StudVoiceMVC\StudVoice.DAL\obj\Debug\netcoreapp2.2\StudVoice.DAL.AssemblyInfo.cs
+C:\StudVoice\StudVoiceMVC\StudVoice.DAL\obj\Debug\netcoreapp2.2\StudVoice.DAL.dll
+C:\StudVoice\StudVoiceMVC\StudVoice.DAL\obj\Debug\netcoreapp2.2\StudVoice.DAL.pdb
+C:\Users\Vitalii Ribii\source\repos\StudVoice\StudVoiceMVC\StudVoice.DAL\bin\Debug\netcoreapp2.2\StudVoice.DAL.deps.json
+C:\Users\Vitalii Ribii\source\repos\StudVoice\StudVoiceMVC\StudVoice.DAL\bin\Debug\netcoreapp2.2\StudVoice.DAL.dll
+C:\Users\Vitalii Ribii\source\repos\StudVoice\StudVoiceMVC\StudVoice.DAL\bin\Debug\netcoreapp2.2\StudVoice.DAL.pdb
+C:\Users\Vitalii Ribii\source\repos\StudVoice\StudVoiceMVC\StudVoice.DAL\obj\Debug\netcoreapp2.2\StudVoice.DAL.csprojAssemblyReference.cache
+C:\Users\Vitalii Ribii\source\repos\StudVoice\StudVoiceMVC\StudVoice.DAL\obj\Debug\netcoreapp2.2\StudVoice.DAL.AssemblyInfoInputs.cache
+C:\Users\Vitalii Ribii\source\repos\StudVoice\StudVoiceMVC\StudVoice.DAL\obj\Debug\netcoreapp2.2\StudVoice.DAL.AssemblyInfo.cs
+C:\Users\Vitalii Ribii\source\repos\StudVoice\StudVoiceMVC\StudVoice.DAL\obj\Debug\netcoreapp2.2\StudVoice.DAL.dll
+C:\Users\Vitalii Ribii\source\repos\StudVoice\StudVoiceMVC\StudVoice.DAL\obj\Debug\netcoreapp2.2\StudVoice.DAL.pdb
