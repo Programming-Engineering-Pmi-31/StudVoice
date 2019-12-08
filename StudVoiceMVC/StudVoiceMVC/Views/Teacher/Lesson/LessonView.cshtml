@@ -10,36 +10,38 @@
     <h4>Lesson</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            Subject:
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            Date:
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateTime)
-        </dd>
-        <dt class = "col-sm-2">
-            Theme:
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Theme)
-        </dd>
-        <dt class = "col-sm-2">
-            Description:
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            Feedbacks:
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LessonFeedbacks)
-        </dd>
+        <div class="container">
+            <div class="col-md-6">
+                <div class="row">
+                    <span>Subject:</span>
+                    @Model.Name
+                </div>
+                <div class="row">
+                    <span>Theme:</span>
+                    @Model.Theme
+                </div>
+                <div class="row">
+                    <span>Date:</span>
+                    @Model.DateTime
+                </div>
+                <div class="row">
+                    <span>Description:</span>
+                    @Model.Description
+                </div>
+            </div>
+            <div class="col-md-6">
+                <span>Feedbacks:</span>
+                <ul>
+                    @foreach(var item in Model.LessonFeedbacks)
+                    {
+                        <li>
+                            <span>@item.Point</span>
+                            <p>@item.FeedBack</p>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
     </dl>
 </div>
 <div>
