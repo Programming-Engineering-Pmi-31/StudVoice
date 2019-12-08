@@ -70,9 +70,9 @@ namespace StudVoiceMVC.Controllers
             return View("~/Views/Teacher/Lesson/CreateLessonView.cshtml");
         }
        
-        public IActionResult Lesson()
-        {
-            return View("~/Views/Teacher/Lesson/LessonView.cshtml");
+        public IActionResult Lesson(LessonDTO lesson)
+        {   
+            return View("~/Views/Teacher/Lesson/LessonView.cshtml", lesson);
         }
 
         [HttpPost]
