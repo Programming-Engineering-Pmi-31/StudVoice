@@ -23,6 +23,7 @@ namespace StudVoice.DAL
             : base(options)
         {
         }
+        public StudVoiceDBContext() { }
 
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<Faculty> Faculties { get; set; }
