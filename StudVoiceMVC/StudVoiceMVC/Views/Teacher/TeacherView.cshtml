@@ -1,0 +1,90 @@
+﻿@model StudVoice.DAL.Teacher
+
+@{
+    ViewData["Title"] = "TeacherView";
+}
+
+<h1>TeacherView</h1>
+
+<div>
+    <h4>Teacher</h4>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">
+                <label> Photo</label>
+            </div>
+            <div class="col-sm-4">
+                <img src="~/Content/images/avatar.png" width="300" height="200" />
+            </div>
+            <div class="col-md-2">
+                <a class="nav-item text-dark" asp-area="" asp-controller="Home" asp-action="CreateLesson">CreateLesson</a>
+            </div>
+            <div class="col-sm-1">
+                <label>Lessons:</label>
+            </div>
+            <div class="col-md-4">
+                <ul>
+                    <li>
+                        <div class="col-md-4">
+                            <dl>
+                                <dt>
+                                    Lesson1
+                                </dt>
+                                <dd>
+                                    <a class="nav-item text-dark" asp-area="" asp-controller="Home" asp-action="Lesson">Lesson</a>
+                                </dd>
+                            </dl>
+                            @*<datalist>
+                    @Html.DisplayNameFor(model => model.Lessons)
+                </datalist>*@
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col-md-4">
+                            <dl>
+                                <dt>
+                                    Lesson2
+                                </dt>
+                                <dd>
+                                    <a class="nav-item text-dark" asp-area="" asp-controller="Home" asp-action="Lesson">Lesson</a>
+                                </dd>
+                            </dl>
+                            @*<datalist>
+                    @Html.DisplayNameFor(model => model.Lessons)
+                </datalist>*@
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>Id</label>
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayNameFor(model => model.Id)
+            </div>
+            <div class="col-sm-2">
+                <label>Feedbacks</label>
+            </div>
+            <div class="col-md-6">
+                <datalist>
+                    @Html.DisplayNameFor(model => model.TeacherFeedbacks)
+                </datalist>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>Name</label>
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayNameFor(model => model.Name)
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>*@ |
+    <a asp-action="Index">Back</a>
+</div>

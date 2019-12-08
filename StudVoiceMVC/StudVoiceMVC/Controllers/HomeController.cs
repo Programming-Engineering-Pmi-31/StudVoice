@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using StudVoice.DAL.UnitOfWork;
 using StudVoiceMVC.Models;
+using StudVoice.BLL.Services.ImplementedServices;
+using QRCoder;
+using System.DrawingCore;
+using System;
+using System.IO;
 
 namespace StudVoiceMVC.Controllers
 {
     public class HomeController : Controller
     {
-
         public IActionResult Index()
         {
             return View();
@@ -22,16 +20,41 @@ namespace StudVoiceMVC.Controllers
         {
             return View();
         }
-        
-        [AllowAnonymous]
-        public ActionResult Login()
+
+        public IActionResult Teacher()
         {
-            return RedirectToAction("Login", "Account");
+            return View("~/Views/Teacher/TeacherView.cshtml");
         }
-        [Authorize]
-        public ActionResult LogOff()
+
+        public IActionResult CreateLesson()
         {
-            return RedirectToAction("LogOff", "Account");
+            return View("~/Views/Teacher/Lesson/CreateLessonView.cshtml");
+        }
+       
+        public IActionResult Lesson()
+        {
+            return View("~/Views/Teacher/Lesson/LessonView.cshtml");
+        }
+
+        [HttpPost]
+        public IActionResult QrCode(string qrText)
+        {
+            qrText = "Text";
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrText,
+            QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            return File(BitmapToBytes(qrCodeImage),"image/jpeg");
+        }
+
+        private static Byte[] BitmapToBytes(Bitmap img)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                img.Save(stream, System.DrawingCore.Imaging.ImageFormat.Png);
+                return stream.ToArray();
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -28,9 +28,7 @@ namespace StudVoiceMVC
             });
 
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(o => o.LoginPath = new PathString("/account/login"));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.ConfigureAuthentication(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +48,6 @@ namespace StudVoiceMVC
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

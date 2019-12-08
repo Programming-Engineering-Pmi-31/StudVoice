@@ -1,0 +1,12 @@
+﻿[
+  {
+    "outputFile": "wwwroot/Content/css/main.css",
+    "inputFile": "wwwroot/Content/scss/main.scss",
+    "minify": {
+      "enabled": false
+    },
+    "options": {
+      "sourceMap": true
+    }
+  }
+]

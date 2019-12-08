@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28306.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudVoiceMVC", "StudVoiceMVC\StudVoiceMVC.csproj", "{58FBA7ED-066D-41BC-A7D2-90A6E9229B91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudVoiceMVC", "StudVoiceMVC\StudVoiceMVC.csproj", "{58FBA7ED-066D-41BC-A7D2-90A6E9229B91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudVoice.DAL", "StudVoice.DAL\StudVoice.DAL.csproj", "{0041B631-FD20-4637-8649-D2336E3B5E66}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudVoice.DAL", "StudVoice.DAL\StudVoice.DAL.csproj", "{0041B631-FD20-4637-8649-D2336E3B5E66}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudVoice.BLL", "StudVoice.BLL\StudVoice.BLL.csproj", "{37345961-EC1E-498B-8F7F-6C18E3BAADD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudVoice.BLL", "StudVoice.BLL\StudVoice.BLL.csproj", "{37345961-EC1E-498B-8F7F-6C18E3BAADD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

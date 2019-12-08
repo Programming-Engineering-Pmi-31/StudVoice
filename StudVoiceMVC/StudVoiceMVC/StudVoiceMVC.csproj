@@ -5,20 +5,42 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="compilerconfig.json" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+    <PackageReference Include="SharpScss" Version="1.4.0" />
+    <PackageReference Include="WebCompiler" Version="1.0.1" />
   </ItemGroup>
 
 
   <ItemGroup>
     <ProjectReference Include="..\StudVoice.BLL\StudVoice.BLL.csproj" />
-    <ProjectReference Include="..\StudVoice.DAL\StudVoice.DAL.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Content\fonts\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
+    <None Include="wwwroot\Content\css\main.css" />
+    <None Include="wwwroot\Content\css\main.min.css" />
+    <None Include="wwwroot\Content\scss\common.scss" />
+    <None Include="wwwroot\Content\scss\layout.scss" />
+    <None Include="wwwroot\Content\scss\main.scss" />
+    <None Include="wwwroot\Content\scss\variables.scss" />
   </ItemGroup>
 
 </Project>
