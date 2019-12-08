@@ -6,7 +6,7 @@ body {
     background: $color-1st;
     margin: 0;
     font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
-    color: #fff;
+    color: #000000;
     padding-left: $menu-width-desktop;
 }
 
@@ -47,11 +47,13 @@ main {
     left: 0;
     z-index: 5;
     outline: none;
+    color: #fff;
 
     .avatar {
         background: rgba(0,0,0,0.1);
         padding: 2em 0.5em;
         text-align: center;
+        cursor: pointer;
 
         img {
             width: 100px;

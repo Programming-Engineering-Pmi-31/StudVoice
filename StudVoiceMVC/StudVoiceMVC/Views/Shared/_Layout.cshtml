@@ -10,12 +10,16 @@
 <body>
     <nav class="menu" tabindex="0">
         <div class="smartphone-menu-trigger"></div>
-        <header class="avatar">
-            <img src="~/Content/images/avatar.png" />
-            <h2>John D.</h2>
+        <header class="avatar" onclick="location.href='@Url.Action("Teacher","Home")'">
+            <div class="avatar-wrapper">
+                <img src="~/Content/images/avatar.png" />
+            </div>
+            <div class="page-link-wrapper">
+                <h2>John D.</h2>
+            </div>
         </header>
         <ul>
-            <li tabindex="0" class="icon-main"><span>Main</span></li>
+            <li tabindex="0" class="icon-main" onclick="location.href='@Url.Action("Index","Home")'"><span>Home</span></li>
             <li tabindex="1" class="icon-top-faculties"><span>Top Faculties</span></li>
             <li tabindex="2" class="icon-top-teachers"><span>Top Teachers</span></li>
             <li tabindex="3" class="icon-top-lessons"><span>Top Lessons</span></li>
@@ -31,6 +35,8 @@
 
 
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
