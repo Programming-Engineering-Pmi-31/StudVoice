@@ -1,4 +1,4 @@
-﻿@model StudVoice.DAL.Teacher
+﻿@model StudVoice.BLL.DTOs.TeacherDTO
 
 @{
     ViewData["Title"] = "TeacherView";
@@ -24,38 +24,17 @@
                 <label>Lessons:</label>
             </div>
             <div class="col-md-4">
-                <ul>
-                    <li>
-                        <div class="col-md-4">
-                            <dl>
-                                <dt>
-                                    Lesson1
-                                </dt>
-                                <dd>
-                                    <a class="nav-item text-dark" asp-area="" asp-controller="Home" asp-action="Lesson">Lesson</a>
-                                </dd>
-                            </dl>
-                            @*<datalist>
-                    @Html.DisplayNameFor(model => model.Lessons)
-                </datalist>*@
-                        </div>
-                    </li>
-                    <li>
-                        <div class="col-md-4">
-                            <dl>
-                                <dt>
-                                    Lesson2
-                                </dt>
-                                <dd>
-                                    <a class="nav-item text-dark" asp-area="" asp-controller="Home" asp-action="Lesson">Lesson</a>
-                                </dd>
-                            </dl>
-                            @*<datalist>
-                    @Html.DisplayNameFor(model => model.Lessons)
-                </datalist>*@
-                        </div>
-                    </li>
-                </ul>
+               <ul>
+                   @foreach (var item in Model.Lessons)
+                   {
+                       <li>
+                           <a class="nav-item text-dark" asp-controller="Home" asp-action="Lesson" asp->
+                               <span>@item.Name</span>
+                               <span>@item.DateTime</span>
+                           </a>
+                       </li>
+                   }
+               </ul>
             </div>
         </div>
         <div class="row">
@@ -70,7 +49,7 @@
             </div>
             <div class="col-md-6">
                 <datalist>
-                    @Html.DisplayNameFor(model => model.TeacherFeedbacks)
+                    @Html.DisplayNameFor(model => model.TeacherFeedBacks)
                 </datalist>
             </div>
         </div>
