@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StudVoiceMVC</title>
+
+    <link href="~/Content/css/main.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="menu" tabindex="0">
+        <div class="smartphone-menu-trigger"></div>
+        <header class="avatar">
+            <img src="~/Content/images/avatar.png" />
+            <h2>John D.</h2>
+        </header>
+        <ul>
+            <li tabindex="0" class="icon-main"><span>Main</span></li>
+            <li tabindex="1" class="icon-top-faculties"><span>Top Faculties</span></li>
+            <li tabindex="2" class="icon-top-teachers"><span>Top Teachers</span></li>
+            <li tabindex="3" class="icon-top-lessons"><span>Top Lessons</span></li>
+            <li tabindex="4" class="icon-login"><span>Login</span></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
