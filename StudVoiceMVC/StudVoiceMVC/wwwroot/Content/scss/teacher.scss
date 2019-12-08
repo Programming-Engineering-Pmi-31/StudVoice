@@ -15,12 +15,12 @@
         max-height: 50%;
     }
 
-    .teacher-lessons {
+    .teacher-lessons, .teacher-feedbacks {
         display: flex;
         flex-direction: column;
 
-        .lessons-container, feedback-container {
-            overflow-y: auto;
+        .lessons-container, .feedbacks-container {
+            overflow-y: auto;            
             margin-bottom: 5%;
         }
     }
