@@ -8,11 +8,24 @@ using System;
 using System.IO;
 using StudVoice.BLL.DTOs;
 using System.Collections.Generic;
+using StudVoice.BLL.Services.Interfaces;
+using StudVoice.BLL.Factories;
+using System.Threading.Tasks;
 
 namespace StudVoiceMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ITeacherService _teacherService;
+        private readonly ILessonService _lessonService;
+
+
+        public HomeController(IServiceFactory serviceFactory)
+        {
+            _teacherService = serviceFactory.TeacherService;
+            _lessonService = serviceFactory.LessonService;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -23,46 +36,10 @@ namespace StudVoiceMVC.Controllers
             return View();
         }
 
-        public IActionResult Teacher()
+        public async Task<IActionResult> Teacher(int id)
         {
-            TeacherDTO teacherdto = new TeacherDTO()
-            {
-                Id = 1,
-                Name = "Ostap",
-                Lessons = new List<LessonDTO>()
-                {
-                    new LessonDTO()
-                    {
-                        Name = "LessonName1",
-                        DateTime = DateTime.Now,
-                        Description = "descriptionafafadadasd",
-                        Theme = "Astronomy",
-                        LessonFeedbacks = new List<LessonFeedbackDTO>()
-                        {
-                            { new LessonFeedbackDTO() { FeedBack = "Heello Feedback for Astronomy 1", LessonId = 1, Point = 10 } },
-                            { new LessonFeedbackDTO() { FeedBack = "Heello Feedback for Astronomy 2", LessonId = 1, Point = 11 } }
-                        },
-                    },
-                    new LessonDTO()
-                    {
-                        Name = "LessonName2",
-                        DateTime = DateTime.Now,
-                        Description = "descriptionafafadadasd",
-                        Theme = "Matan",
-                        LessonFeedbacks = new List<LessonFeedbackDTO>()
-                        {
-                            { new LessonFeedbackDTO() { FeedBack = "Heello Feedback for Matan 1", LessonId = 2, Point = 5 } },
-                            { new LessonFeedbackDTO() { FeedBack = "Heello Feedback for Matan 2", LessonId = 2, Point = 4 } }
-                        },
-                    }
-                },
-                TeacherFeedBacks = new List<TeacherFeedbackDTO>()
-                {
-                    {new TeacherFeedbackDTO(){Feedback = "Good teacher",Point = 12,TeacherId = 1 } },
-                    {new TeacherFeedbackDTO(){Feedback = "Bad teacher",Point = 2,TeacherId = 1 } }
-                }
-            };
-            return View("~/Views/Teacher/TeacherView.cshtml",teacherdto);
+            var res = await _teacherService.GetAsync(id);
+            return View("~/Views/Teacher/TeacherView.cshtml",res);
         }
 
         public IActionResult CreateLesson()
@@ -70,9 +47,9 @@ namespace StudVoiceMVC.Controllers
             return View("~/Views/Teacher/Lesson/CreateLessonView.cshtml");
         }
        
-        public IActionResult Lesson(LessonDTO lesson)
+        public IActionResult Lesson(int id)
         {   
-            return View("~/Views/Teacher/Lesson/LessonView.cshtml", lesson);
+            return View("~/Views/Teacher/Lesson/LessonView.cshtml", _lessonService.GetAsync(id));
         }
 
         [HttpPost]

@@ -12,7 +12,7 @@ namespace StudVoice.BLL.Mappings
         public LessonProfile()
         {
             CreateMap<Lesson, LessonDTO>()
-                .ForMember(t => t.Name, opt => opt.MapFrom(t => t.Name))
+                .ForMember(t => t.Id, opt => opt.MapFrom(t => t.Id))
                 .ForMember(t => t.Name, opt => opt.MapFrom(t => t.Name))
                 .ForMember(t => t.Theme, opt => opt.MapFrom(t => t.Theme))
                 .ForMember(t => t.Description, opt => opt.MapFrom(t => t.Description))
@@ -20,7 +20,7 @@ namespace StudVoice.BLL.Mappings
                 .ForMember(t => t.LessonFeedbacks, opt => opt.MapFrom(t => t.LessonFeedbacks));
 
             CreateMap<LessonDTO, Lesson>()
-                .ForMember(t => t.Name, opt => opt.MapFrom(t => t.Name))
+                .ForMember(t=>t.Id,opt=>opt.MapFrom(t=>t.Id))
                 .ForMember(t => t.Name, opt => opt.MapFrom(t => t.Name))
                 .ForMember(t => t.Theme, opt => opt.MapFrom(t => t.Theme))
                 .ForMember(t => t.Description, opt => opt.MapFrom(t => t.Description))

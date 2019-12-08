@@ -29,7 +29,7 @@ namespace StudVoice.BLL.Services.ImplementedServices
             {
                 Teacher teacher = _mapper.Map<Teacher>(dto);
                 var res = await _unitOfWork.TeacherRepository.AddAsync(teacher);
-                return _mapper.Map<TeacherDTO>(res);
+                return _mapper.Map<Teacher,TeacherDTO>(res);
             }
             catch(Exception ex)
             {
@@ -45,14 +45,15 @@ namespace StudVoice.BLL.Services.ImplementedServices
 
         public async Task<TeacherDTO> GetAsync(int id)
         {
-            return _mapper.Map<TeacherDTO>(await _unitOfWork.TeacherRepository.GetByIdAsync(id));
+            var res = await _unitOfWork.TeacherRepository.GetByIdAsync(id);
+            return _mapper.Map<Teacher,TeacherDTO>(res);
         }
 
         public async Task<IEnumerable<TeacherDTO>> GetRangeAsync(uint offset, uint amount)
         {
             List<Teacher> source = await _unitOfWork.TeacherRepository.GetRangeAsync(offset, amount);
             List<TeacherDTO> res = new List<TeacherDTO>();
-            source.ForEach(x => res.Add(_mapper.Map<TeacherDTO>(x)));
+            source.ForEach(x => res.Add(_mapper.Map<Teacher,TeacherDTO>(x)));
             return res;
         }
 
@@ -65,7 +66,7 @@ namespace StudVoice.BLL.Services.ImplementedServices
         {
             Teacher teacher = _mapper.Map<Teacher>(dto);
             _unitOfWork.TeacherRepository.Update(teacher);
-            return _mapper.Map<TeacherDTO>(await _unitOfWork.TeacherRepository.GetByIdAsync(teacher.Id));
+            return _mapper.Map<Teacher,TeacherDTO>(await _unitOfWork.TeacherRepository.GetByIdAsync(teacher.Id));
         }
     }
 }
