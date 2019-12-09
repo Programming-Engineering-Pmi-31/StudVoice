@@ -55,5 +55,6 @@ namespace StudVoice.DAL
         public virtual ICollection<Teacher> TeacherMod { get; set; }
         public virtual ICollection<TeacherFeedback> TeacherFeedbackCreate { get; set; }
         public virtual ICollection<TeacherFeedback> TeacherFeedbackMod { get; set; }
+        public string PasswordHash { get; set; }
     }
 }
