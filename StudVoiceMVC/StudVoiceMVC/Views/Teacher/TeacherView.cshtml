@@ -35,9 +35,18 @@
                 @Model.Name
             </div>
         </div>
+        <div class="row">
+            @{
+                if (Model.QrCode != null)
+                {
+                    <img width="300" height="auto" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.QrCode))" />
+                }
+            }
+        </div>  
     </div>
     <div class="col-8 h-100">
         <div class="teacher-lessons">
+            <a href="#" onclick="location.href='@Url.Action("CreateLessonForm","Home",new { teacherid = @Model.Id })'">Create Lesson</a>
             <label class="card-title w-100">Lessons:</label>
             <div class="lessons-container">
                 <ul class="list-group">

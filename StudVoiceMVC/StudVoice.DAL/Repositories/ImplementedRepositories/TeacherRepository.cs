@@ -14,6 +14,7 @@ namespace StudVoice.DAL.Repositories.ImplementedRepositories
         public override Task<Teacher> GetByIdAsync(int id)
         {
             return ComplexEntities.SingleOrDefaultAsync(entity => entity.Id == id);
+            
         }
 
         protected override IQueryable<Teacher> ComplexEntities => base.Entities

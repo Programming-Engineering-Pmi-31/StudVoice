@@ -10,8 +10,8 @@
     <h4>Lesson</h4>
     <hr />
     <dl class="row">
-        <div class="container">
-            <div class="col-md-6">
+        <div class="container row">
+            <div class="col-md-4">
                 <div class="row">
                     <span>Subject:</span>
                     @Model.Name
@@ -28,11 +28,19 @@
                     <span>Description:</span>
                     @Model.Description
                 </div>
+                <div class="row">
+                    @{
+                        if (Model.QrCode != null)
+                        {
+                            <img width="300" height="auto" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.QrCode))" />
+                        }
+                    }
+                </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <span>Feedbacks:</span>
                 <ul>
-                    @foreach(var item in Model.LessonFeedbacks)
+                    @foreach (var item in Model.LessonFeedbacks)
                     {
                         <li>
                             <span>@item.Point</span>

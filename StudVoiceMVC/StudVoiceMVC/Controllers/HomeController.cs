@@ -38,30 +38,38 @@ namespace StudVoiceMVC.Controllers
 
         public async Task<IActionResult> Teacher(int id)
         {
-            return View("~/Views/Teacher/TeacherView.cshtml", await _teacherService.GetAsync(id));
+            var teacherDTO = await _teacherService.GetAsync(id);
+            teacherDTO.QrCode = QrCode("https://localhost:44343/Home/Teacher/" + $"{teacherDTO.Id}");
+            return View("~/Views/Teacher/TeacherView.cshtml", teacherDTO);
         }
 
-        public IActionResult CreateLesson()
+        public IActionResult CreateLessonForm(int teacherid)
         {
-            return View("~/Views/Teacher/Lesson/CreateLessonView.cshtml");
+            return View("~/Views/Teacher/Lesson/CreateLessonView.cshtml",new LessonDTO() { TeacherId = teacherid});
         }
        
+        //public async void AddLesson(LessonDTO lessonDTO)
+        //{
+        //    var res =await _lessonService.CreateAsync(lessonDTO);
+        //    Lesson(res.Id);
+        //}
+
         public async Task<IActionResult> Lesson(int id)
         {
-            var res = await _lessonService.GetAsync(id);
-            return View("~/Views/Teacher/Lesson/LessonView.cshtml",res);
+            var lessonDTO = await _lessonService.GetAsync(id);
+            lessonDTO.QrCode = QrCode("https://localhost:44343/Home/Lesson/"+$"{lessonDTO.Id}");
+            return View("~/Views/Teacher/Lesson/LessonView.cshtml", lessonDTO);
         }
 
         [HttpPost]
-        public IActionResult QrCode(string qrText)
+        public Byte[] QrCode(string qrText)
         {
-            qrText = "Text";
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrText,
             QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
             Bitmap qrCodeImage = qrCode.GetGraphic(20);
-            return File(BitmapToBytes(qrCodeImage),"image/jpeg");
+            return BitmapToBytes(qrCodeImage);
         }
 
         private static Byte[] BitmapToBytes(Bitmap img)

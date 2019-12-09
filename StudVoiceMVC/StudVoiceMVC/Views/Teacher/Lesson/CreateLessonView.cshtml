@@ -1,4 +1,4 @@
-﻿@model StudVoice.DAL.Lesson
+﻿@model StudVoice.BLL.DTOs.LessonDTO
 
 @{
     ViewData["Title"] = "CreateLessonView";
@@ -10,11 +10,12 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateLessonView">
+        <form asp-action="CreateLessonForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="TeacherId" class="control-label"></label>
-                <select asp-for="TeacherId" class ="form-control" asp-items="ViewBag.TeacherId"></select>
+                <input asp-for="TeacherId" disabled="disabled" class="form-control" />
+                <span asp-validation-for="TeacherId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -28,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Theme" class="control-label"></label>
-                <input asp-for="Theme" class="form-control" /> 
+                <input asp-for="Theme" class="form-control" />
                 <span asp-validation-for="Theme" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -41,13 +42,10 @@
             </div>
         </form>
     </div>
-    <div class="col-md-4">
-        <img src='@Url.Action("QrCode")' alt="" />
-    </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back</a>
 </div>
 
 @section Scripts {

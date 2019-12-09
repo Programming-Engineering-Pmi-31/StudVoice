@@ -13,6 +13,7 @@ namespace StudVoice.BLL.Mappings
         {
             CreateMap<Lesson, LessonDTO>()
                 .ForMember(t => t.Id, opt => opt.MapFrom(t => t.Id))
+                .ForMember(t=>t.TeacherId,opt=>opt.MapFrom(t=>t.TeacherId))
                 .ForMember(t => t.Name, opt => opt.MapFrom(t => t.Name))
                 .ForMember(t => t.Theme, opt => opt.MapFrom(t => t.Theme))
                 .ForMember(t => t.Description, opt => opt.MapFrom(t => t.Description))
@@ -21,6 +22,7 @@ namespace StudVoice.BLL.Mappings
 
             CreateMap<LessonDTO, Lesson>()
                 .ForMember(t=>t.Id,opt=>opt.MapFrom(t=>t.Id))
+                .ForMember(t => t.TeacherId, opt => opt.MapFrom(t => t.TeacherId))
                 .ForMember(t => t.Name, opt => opt.MapFrom(t => t.Name))
                 .ForMember(t => t.Theme, opt => opt.MapFrom(t => t.Theme))
                 .ForMember(t => t.Description, opt => opt.MapFrom(t => t.Description))

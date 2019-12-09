@@ -39,6 +39,7 @@ namespace StudVoice.DAL.Repositories
         public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
             var entityEntry = await _entities.AddAsync(entity);
+            _context.SaveChanges();
             return entityEntry.Entity;
         }
 
@@ -49,18 +50,22 @@ namespace StudVoice.DAL.Repositories
             {
                 model = _entities.Remove(model).Entity;
             }
-
+            _context.SaveChanges();
             return model;
         }
 
         public virtual TEntity Remove(TEntity entity)
         {
-            return _entities.Remove(entity).Entity;
+            var res =_entities.Remove(entity).Entity;
+            _context.SaveChanges();
+            return res;
         }
 
         public virtual TEntity Update(TEntity entity)
         {
-            return _entities.Update(entity).Entity;
+            var res = _entities.Update(entity).Entity;
+            _context.SaveChanges();
+            return res;
         }
 
         public virtual Task<List<TEntity>> GetRangeAsync(uint index, uint amount)
