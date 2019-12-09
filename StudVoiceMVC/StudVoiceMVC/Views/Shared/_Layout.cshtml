@@ -8,23 +8,34 @@
     <link href="~/Content/css/main.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
+
 <body>
     <nav class="menu" tabindex="0">
         <div class="smartphone-menu-trigger"></div>
-        <header class="avatar" onclick="location.href='@Url.Action("Teacher","Home",new { Id = 1})'">
+        @if (User.Identity.IsAuthenticated)
+        {
+        <header class="avatar" onclick="location.href='@Url.Action("Teacher", "Home", new { Name = User.Identity.Name })'">
             <div class="avatar-wrapper">
                 <img src="~/Content/images/avatar.png" />
             </div>
             <div class="page-link-wrapper">
-                <h2>John D.</h2>
+                <h2>@User.Identity.Name</h2>
             </div>
         </header>
+        }
         <ul>
             <li tabindex="0" class="icon-main" onclick="location.href='@Url.Action("Index","Home")'"><span>Home</span></li>
             <li tabindex="1" class="icon-top-faculties"><span>Top Faculties</span></li>
             <li tabindex="2" class="icon-top-teachers"><span>Top Teachers</span></li>
             <li tabindex="3" class="icon-top-lessons"><span>Top Lessons</span></li>
-            <li tabindex="4" class="icon-login"><span>Login</span></li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li tabindex="4" class="icon-login" onclick="location.href='@Url.Action("Logout", "Account")'"><span>Logout</span></li>
+            }
+            else
+            {
+            <li tabindex="4" class="icon-login" onclick="location.href='@Url.Action("Login", "Account")'"><span>Login</span></li>
+            }
         </ul>
     </nav>
 

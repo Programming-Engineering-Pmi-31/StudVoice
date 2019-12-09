@@ -49,6 +49,20 @@ namespace StudVoice.BLL.Services.ImplementedServices
             return _mapper.Map<Teacher,TeacherDTO>(res);
         }
 
+        public async Task<TeacherDTO> GetAsyncName(string name)
+        {
+            var res = await _unitOfWork.TeacherRepository.GetAllAsync();
+            var rr = res.Find(x => x.Name == name);
+            return _mapper.Map<Teacher, TeacherDTO>(rr);
+        }
+
+        public async Task<TeacherDTO> GetAsyncNameAsync(string name)
+        {
+            var res = await _unitOfWork.TeacherRepository.GetAllAsync();
+            var rr = res.Find(x => x.Name == name);
+            return _mapper.Map<Teacher, TeacherDTO>(rr);
+        }
+
         public async Task<IEnumerable<TeacherDTO>> GetRangeAsync(uint offset, uint amount)
         {
             List<Teacher> source = await _unitOfWork.TeacherRepository.GetRangeAsync(offset, amount);

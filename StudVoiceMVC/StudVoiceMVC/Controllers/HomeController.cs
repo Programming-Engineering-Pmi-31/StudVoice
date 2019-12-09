@@ -1,16 +1,19 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using StudVoiceMVC.Models;
-using StudVoice.BLL.Services.ImplementedServices;
 using QRCoder;
 using System.DrawingCore;
 using System;
 using System.IO;
 using StudVoice.BLL.DTOs;
-using System.Collections.Generic;
 using StudVoice.BLL.Services.Interfaces;
 using StudVoice.BLL.Factories;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using StudVoice.DAL;
+using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using StudVoice.DAL.Repositories.ImplementedRepositories;
 
 namespace StudVoiceMVC.Controllers
 {
@@ -18,8 +21,7 @@ namespace StudVoiceMVC.Controllers
     {
         private readonly ITeacherService _teacherService;
         private readonly ILessonService _lessonService;
-
-
+        
         public HomeController(IServiceFactory serviceFactory)
         {
             _teacherService = serviceFactory.TeacherService;
@@ -36,9 +38,10 @@ namespace StudVoiceMVC.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Teacher(int id)
+        public async Task<IActionResult> Teacher(string name)
         {
-            var teacherDTO = await _teacherService.GetAsync(id);
+            var t = await _teacherService.GetAsyncNameAsync(name);
+            var teacherDTO = await _teacherService.GetAsync(t.Id);
             teacherDTO.QrCode = QrCode("https://localhost:44343/Home/Teacher/" + $"{teacherDTO.Id}");
             return View("~/Views/Teacher/TeacherView.cshtml", teacherDTO);
         }

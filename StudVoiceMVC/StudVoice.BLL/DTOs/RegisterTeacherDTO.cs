@@ -5,6 +5,37 @@ using System.Text;
 
 namespace StudVoice.BLL.DTOs
 {
+    public class StringValueAttribute : System.Attribute
+    {
+
+        private string _value;
+
+        public StringValueAttribute(string value)
+        {
+            _value = value;
+        }
+
+        public string Value
+        {
+            get { return _value; }
+        }
+
+    }
+    public enum Faculties
+    {
+        //"Культури і мистецтв" 
+        //"Журналістики",
+        //"Прикладної математики та інформатики",
+        //"Історичний"
+        [StringValue("Культури і мистецтв")]
+        Culture = 1,
+        [StringValue("Журналістики")]
+        Journalistics = 2,
+        [StringValue("Прикладної математики та інформатики")]
+        AMI = 3,
+        [StringValue("Історичний")]
+        History = 4,
+    }
     public class RegisterTeacherDTO
     {
         [Required]
@@ -27,8 +58,8 @@ namespace StudVoice.BLL.DTOs
         public string ContactPhone { get; set; }
 
 
-        //[Required]
-        public string Faculty { get; set; }
+        [Required]
+        public Faculties Faculty { get; set; }
 
         [Required]
         [RegularExpression("^[a-zA-ZА-ЯҐЄІЇґєії]+$", ErrorMessage = "Please enter department in valid format.")]

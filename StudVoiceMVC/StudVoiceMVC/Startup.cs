@@ -1,4 +1,6 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,13 +36,37 @@ namespace StudVoiceMVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+
+            //services.ConfigureAuthentication(Configuration);
+
+            services.AddAuthentication(sharedOptions =>
+            {
+                sharedOptions.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                sharedOptions.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                // sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            })
+            .AddCookie(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                options =>
+                {
+                    options.LoginPath = "/Account/Loginn"; ;
+                    options.AccessDeniedPath = new PathString("/account/login");
+                    options.Cookie.Name = "AUTHCOOKIE";
+                    options.ExpireTimeSpan = new TimeSpan(365, 0, 0, 0);
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                    options.Cookie.SameSite = SameSiteMode.None;
+
+                }
+            );
+
             services.AddMvc(options =>
             {
                 options.Filters.Add(typeof(SetCurrentUserAttribute));
                 options.Filters.Add(typeof(ValidateModelStateAttribute));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.ConfigureAuthentication(Configuration);
+           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +87,8 @@ namespace StudVoiceMVC
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseAuthentication();
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -68,7 +96,9 @@ namespace StudVoiceMVC
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseAuthentication();
+            
+
+
 
             app.Seed(serviceProvider, Environment);
         }

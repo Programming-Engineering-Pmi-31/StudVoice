@@ -25,6 +25,10 @@ namespace StudVoice.DAL.Repositories
         {
             return ComplexEntities.SingleOrDefaultAsync(entity => entity.Id == id);
         }
+        public virtual Task<TEntity> GetByNameAsync(string name)
+        {
+            return ComplexEntities.SingleOrDefaultAsync(entity => entity.Id == 1);
+        }
 
         public virtual Task<List<TEntity>> GetAllAsync()
         {

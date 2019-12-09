@@ -19,8 +19,8 @@ namespace StudVoice.BLL.DTOs
         [RegularExpression("^[a-zA-ZА-ЯҐЄІЇґєії]+$", ErrorMessage = "Please enter patronym in valid format.")]
         public string Patronym { get; set; }//по батькові
 
-        //[Required]
-        public string Faculty { get; set; }
+        [Required]
+        public Faculties Faculty { get; set; }
 
         [Required]
         public string Email { get; set; }
