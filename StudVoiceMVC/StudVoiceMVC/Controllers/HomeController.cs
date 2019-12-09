@@ -6,11 +6,26 @@ using QRCoder;
 using System.DrawingCore;
 using System;
 using System.IO;
+using StudVoice.BLL.DTOs;
+using System.Collections.Generic;
+using StudVoice.BLL.Services.Interfaces;
+using StudVoice.BLL.Factories;
+using System.Threading.Tasks;
 
 namespace StudVoiceMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ITeacherService _teacherService;
+        private readonly ILessonService _lessonService;
+
+
+        public HomeController(IServiceFactory serviceFactory)
+        {
+            _teacherService = serviceFactory.TeacherService;
+            _lessonService = serviceFactory.LessonService;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -21,9 +36,9 @@ namespace StudVoiceMVC.Controllers
             return View();
         }
 
-        public IActionResult Teacher()
+        public async Task<IActionResult> Teacher(int id)
         {
-            return View("~/Views/Teacher/TeacherView.cshtml");
+            return View("~/Views/Teacher/TeacherView.cshtml", await _teacherService.GetAsync(id));
         }
 
         public IActionResult CreateLesson()
@@ -31,9 +46,10 @@ namespace StudVoiceMVC.Controllers
             return View("~/Views/Teacher/Lesson/CreateLessonView.cshtml");
         }
        
-        public IActionResult Lesson()
+        public async Task<IActionResult> Lesson(int id)
         {
-            return View("~/Views/Teacher/Lesson/LessonView.cshtml");
+            var res = await _lessonService.GetAsync(id);
+            return View("~/Views/Teacher/Lesson/LessonView.cshtml",res);
         }
 
         [HttpPost]

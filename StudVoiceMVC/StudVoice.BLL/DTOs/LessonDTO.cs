@@ -6,6 +6,7 @@ namespace StudVoice.BLL.DTOs
 {
     public class LessonDTO
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Theme { get; set; }
         public DateTime DateTime { get; set; }

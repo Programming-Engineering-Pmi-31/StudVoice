@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StudVoice.BLL.DTOs
+namespace StudVoice.BLL.Mappings
 {
-    public class TeacherFeedbackProfile:Profile
+    public class TeacherFeedbackProfile : Profile
     {
         public TeacherFeedbackProfile()
         {
@@ -21,6 +21,5 @@ namespace StudVoice.BLL.DTOs
                 .ForMember(t => t.Feedback, opt => opt.MapFrom(t => t.Feedback))
                 .ForMember(t => t.Point, opt => opt.MapFrom(t => t.Point));
         }
-
-    }
+    }    
 }

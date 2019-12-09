@@ -24,6 +24,8 @@ namespace StudVoice.BLL
         private static void ConfigureServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITeacherService, TeacherService>();
+            services.AddScoped<ILessonService, LessonService>();
         }
 
         private static void ConfigureAutoMapper(this IServiceCollection services)
@@ -32,6 +34,10 @@ namespace StudVoice.BLL
             {
                 c.AddProfile(new RoleProfile());
                 c.AddProfile(new UserProfile());
+                c.AddProfile(new TeacherProfile());
+                c.AddProfile(new LessonProfile());
+                c.AddProfile(new LessonFeedbackProfile());
+                c.AddProfile(new TeacherFeedbackProfile());
             }).CreateMapper());
         }
     }
