@@ -138,10 +138,7 @@ namespace StudVoiceMVC.Controllers
 
                     user_db.ContactId = contact.Id;
 
-                    var md5 = new MD5CryptoServiceProvider();
-                    var data = Encoding.ASCII.GetBytes(model.Password);
-                    var md5data = md5.ComputeHash(data);
-                    var hashedPassword = Encoding.ASCII.GetString(md5data);
+                    var hashedPassword = string.Join("", MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(model.Password)).Select(s => s.ToString("x2")));
 
                     user_db.PasswordHash = hashedPassword;
 
@@ -224,10 +221,7 @@ namespace StudVoiceMVC.Controllers
                     teacher.Name = registerTeacher.Name;
                     db.Teachers.Add(teacher);
 
-                    var md5 = new MD5CryptoServiceProvider();
-                    var data = Encoding.ASCII.GetBytes(registerTeacher.Password);
-                    var md5data = md5.ComputeHash(data);
-                    var hashedPassword = Encoding.ASCII.GetString(md5data);
+                    var hashedPassword = string.Join("", MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(registerTeacher.Password)).Select(s => s.ToString("x2")));
 
                     user_db.PasswordHash = hashedPassword;
 
