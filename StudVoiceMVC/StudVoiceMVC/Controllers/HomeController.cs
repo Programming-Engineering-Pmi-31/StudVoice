@@ -39,7 +39,7 @@ namespace StudVoiceMVC.Controllers
         public async Task<IActionResult> Teacher(int id)
         {
             var teacherDTO = await _teacherService.GetAsync(id);
-            teacherDTO.QrCode = QrCode("https://localhost:44343/Home/Teacher/" + $"{teacherDTO.Id}");
+            teacherDTO.QrCode = QrCode(this.Url.Action("Teacher", "Home", new { id = id }, this.Request.Scheme));
             return View("~/Views/Teacher/TeacherView.cshtml", teacherDTO);
         }
 
@@ -57,7 +57,7 @@ namespace StudVoiceMVC.Controllers
         public async Task<IActionResult> Lesson(int id)
         {
             var lessonDTO = await _lessonService.GetAsync(id);
-            lessonDTO.QrCode = QrCode("https://localhost:44343/Home/Lesson/"+$"{lessonDTO.Id}");
+            lessonDTO.QrCode = QrCode(this.Url.Action("Lesson", "Home", new { id = lessonDTO.Id }, this.Request.Scheme));
             return View("~/Views/Teacher/Lesson/LessonView.cshtml", lessonDTO);
         }
 
