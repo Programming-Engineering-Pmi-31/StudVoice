@@ -1,0 +1,24 @@
+﻿@import "variables.scss";
+
+.lesson-container {
+    height: 90vh;
+
+    .feedbacks-container {
+        height: 100%;
+        overflow-y: auto;
+        margin-bottom: 5%;
+        font-size: 18px;
+
+        li:hover {
+            background-color: $color-3nd;
+        }
+
+        .list-group-item {
+            padding: .5rem .75rem;
+            
+            a {
+                text-decoration: none !important;
+            }
+        }
+    }
+}

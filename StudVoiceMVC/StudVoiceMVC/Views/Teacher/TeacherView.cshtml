@@ -14,28 +14,22 @@
 <hr />
 
 <div class="container row teacher-container">
-    <div class="col-4">
-        <div class="row">
+    <div class="col-4 justify-content-center">
+        <div class="row justify-content-center">
             <img src="~/Content/images/avatar.png" />
         </div>
         </br>
-        <div class="row">
-            <div class="col-6">
-                <label>Id:</label>
-            </div>
-            <div class="col-6">
-                @Model.Id
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <label>Name:</label>
-            </div>
-            <div class="col-6">
+        <div class="row justify-content-center">
+            <div class="col-6 text-center">
                 @Model.Name
             </div>
         </div>
-        <div class="row">
+        <div class="row  justify-content-center">
+            <div class="col-6 text-center">
+                <p class="small ">id:@Model.Id</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
             @{
                 if (Model.QrCode != null)
                 {
@@ -46,16 +40,30 @@
     </div>
     <div class="col-8 h-100">
         <div class="teacher-lessons">
-            <a href="#" onclick="location.href='@Url.Action("CreateLessonForm","Home",new { teacherid = @Model.Id })'">Create Lesson</a>
-            <label class="card-title w-100">Lessons:</label>
+            <div class="lessons-header">
+                <div>
+                    <label class="card-title w-100">Lessons:</label>
+                </div>
+                <button class="add-lesson-btn btn" onclick="location.href='@Url.Action("CreateLessonForm","Home",new { teacherid = @Model.Id })'">
+                    Add
+                    <img class="add-lesson-img" src="~/Content/images/add.png"/>
+                </button>
+            </div>
             <div class="lessons-container">
                 <ul class="list-group">
                     @foreach (var item in Model.Lessons)
                     {
-                        <li class=" list-group-item">
-                            <a class="nav-item text-dark" href="#" onclick="location.href='@Url.Action("Lesson","Home",new { Id = item.Id })'">
+                        <li class=" list-group-item" href="#" onclick="location.href='@Url.Action("Lesson","Home",new { Id = item.Id })'">
+                            <a class="nav-item text-dark">
                                 <span>@item.Name</span>
                                 <span>@item.DateTime</span>
+                                @{ 
+                                    double avgMark = 0;
+                                    item.LessonFeedbacks.ToList().ForEach(x => avgMark += x.Point);
+                                    avgMark /= item.LessonFeedbacks.Count();
+                                }
+                                <span>Mark: @avgMark.ToString("F")</span>
+
                             </a>
                         </li>
                     }
