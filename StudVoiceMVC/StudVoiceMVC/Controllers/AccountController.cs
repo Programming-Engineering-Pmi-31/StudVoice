@@ -49,6 +49,10 @@ namespace StudVoiceMVC.Controllers
                 User user = db.Users.Select(t => t).Where(u => u.Email == model.Login && u.PasswordHash == hashedPassword).FirstOrDefault();
                 if (user != null)
                 {
+                    if(!user.EmailConfirmed)
+                    {
+                        ModelState.AddModelError("", "You haven`t confirmed email. Please, follow the link that that you received on email box from StudVoice");
+                    }
                     Teacher t = db.Teachers.FirstOrDefault(x => x.UserId == user.Id);
                     if (t!=null)
                     {
@@ -97,7 +101,7 @@ namespace StudVoiceMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterStudent(RegisterStudentDTO model)
+        public IActionResult RegisterStudent(RegisterStudentDTO model)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +111,7 @@ namespace StudVoiceMVC.Controllers
                     return View(model);
                 }
                 User user = null;
-                
+
                 var us = db.Users.FirstOrDefault(u => u.Contact.Email == model.Email);
                 var id = db.Faculties.Where(x => x.Id == (int)model.Faculty).Select(x => x.Id).FirstOrDefault();
                 if (us != null)
@@ -137,6 +141,7 @@ namespace StudVoiceMVC.Controllers
                     db.Contacts.Add(contact);
 
                     user_db.ContactId = contact.Id;
+                    
 
                     var hashedPassword = string.Join("", MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(model.Password)).Select(s => s.ToString("x2")));
 
@@ -148,18 +153,6 @@ namespace StudVoiceMVC.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View(model);
-        }
-
-        private ClaimsPrincipal CreatePrincipal(User user)
-        {
-                var claims = new List<Claim>
-        {
-            new Claim("UserId", user.Id.ToString()),
-            new Claim("UserName", user.Email)
-        };
-                var principal = new ClaimsPrincipal();
-                principal.AddIdentity(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme));
-                return principal;
         }
 
 
@@ -231,6 +224,11 @@ namespace StudVoiceMVC.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View(registerTeacher);
+        }
+
+        public IActionResult ConfirmEmail()
+        {
+            return View();
         }
     }
 }
