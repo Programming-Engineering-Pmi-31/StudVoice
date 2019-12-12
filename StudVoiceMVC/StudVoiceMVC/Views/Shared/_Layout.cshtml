@@ -12,16 +12,27 @@
 <body>
     <nav class="menu" tabindex="0">
         <div class="smartphone-menu-trigger"></div>
-        @if (User.Identity.IsAuthenticated)
+        @if (User.Identity.IsAuthenticated && User.HasClaim(System.Security.Claims.ClaimTypes.Role, "Teacher"))
         {
-        <header class="avatar" onclick="location.href='@Url.Action("Teacher", "Home", new { Name = User.Identity.Name })'">
-            <div class="avatar-wrapper">
-                <img src="~/Content/images/avatar.png" />
-            </div>
-            <div class="page-link-wrapper">
-                <h2>@User.Identity.Name</h2>
-            </div>
-        </header>
+            <header class="avatar" onclick="location.href='@Url.Action("Teacher", "Home", new { Name = User.Identity.Name })'">
+                <div class="avatar-wrapper">
+                    <img src="~/Content/images/avatar.png" />
+                </div>
+                <div class="page-link-wrapper">
+                    <h2>@User.Identity.Name</h2>
+                </div>
+            </header>
+        }
+        else if (User.Identity.IsAuthenticated && User.HasClaim(System.Security.Claims.ClaimTypes.Role, "Student"))
+        {
+            <header class="avatar">
+                <div class="avatar-wrapper">
+                    <h2>Student</h2>
+                </div>
+                <div class="page-link-wrapper">
+                    <h2>@User.Identity.Name</h2>
+                </div>
+            </header>
         }
         <ul>
             <li tabindex="0" class="icon-main" onclick="location.href='@Url.Action("Index","Home")'"><span>Home</span></li>
@@ -34,7 +45,7 @@
             }
             else
             {
-            <li tabindex="4" class="icon-login" onclick="location.href='@Url.Action("Login", "Account")'"><span>Login</span></li>
+                <li tabindex="4" class="icon-login" onclick="location.href='@Url.Action("Login", "Account")'"><span>Login</span></li>
             }
         </ul>
     </nav>
