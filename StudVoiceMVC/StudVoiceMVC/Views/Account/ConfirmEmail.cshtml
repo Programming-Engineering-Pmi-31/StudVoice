@@ -1,0 +1,222 @@
+﻿
+@{
+    ViewData["Title"] = "ConfirmEmail";
+}
+
+<style scoped>
+    @@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+    body {
+        font-family: montserrat, arial, verdana;
+        background: linear-gradient(-45deg, #413d3d, #8a8888, #4f5c6a, #788ea2);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+    }
+
+    @@keyframes gradientBG {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    /*form styles*/
+    #msform {
+        width: 400px;
+        margin: 50px auto;
+        text-align: center;
+        position: relative;
+        font-size: 13px;
+    }
+
+        #msform fieldset {
+            background: white;
+            border: 0 none;
+            border-radius: 3px;
+            box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+            padding: 20% 11px;
+            box-sizing: border-box;
+            width: 100%;
+            /*stacking fieldsets above each other*/
+            position: relative;
+        }
+            /*Hide all except first fieldset*/
+            #msform fieldset:not(:first-of-type) {
+                display: none;
+            }
+        /*inputs*/
+        #msform input, #msform textarea {
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: montserrat;
+            color: #2C3E50;
+            font-size: 13px;
+        }
+        /*buttons*/
+        #msform .action-button {
+            width: 100px;
+            background: #27AE60;
+            font-weight: bold;
+            color: white;
+            border: 0 none;
+            border-radius: 1px;
+            cursor: pointer;
+            padding: 10px 5px;
+            margin: 10px 5px;
+        }
+
+            #msform .action-button:hover, #msform .action-button:focus {
+                box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+            }
+    /*headings*/
+    .fs-title {
+        font-size: 15px;
+        text-transform: uppercase;
+        color: #2C3E50;
+        margin-bottom: 10px;
+    }
+
+    .fs-subtitle {
+        font-weight: normal;
+        font-size: 13px;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .fs-sub-sub {
+        font-weight: 600;
+        font-size: 10px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+    /*progressbar*/
+    #progressbar {
+        margin-bottom: 30px;
+        overflow: hidden;
+        /*CSS counters to number the steps*/
+        counter-reset: step;
+        padding-left: 0;
+    }
+
+        #progressbar li {
+            list-style-type: none;
+            color: black;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 9px;
+            width: 33.33%;
+            float: left;
+            position: relative;
+        }
+
+            #progressbar li:before {
+                content: counter(step);
+                counter-increment: step;
+                width: 20px;
+                line-height: 20px;
+                display: block;
+                font-size: 10px;
+                color: #333;
+                background: white;
+                border-radius: 3px;
+                margin: 0 auto 5px auto;
+            }
+            /*progressbar connectors*/
+            #progressbar li:after {
+                content: '';
+                width: 100%;
+                height: 2px;
+                background: white;
+                position: absolute;
+                left: -50%;
+                top: 9px;
+                z-index: -1; /*put it behind the numbers*/
+            }
+
+            #progressbar li:first-child:after {
+                /*connector not needed before the first step*/
+                content: none;
+            }
+            /*marking active/completed steps green*/
+            /*The number of the step and the connector before it = green*/
+            #progressbar li.active:before, #progressbar li.active:after {
+                background: #27AE60;
+                color: white;
+            }
+
+    #error {
+        color: black;
+    }
+
+    .form-control .input-validation-error form-group {
+        color: red;
+    }
+
+    .field-validation-error {
+        display: block;
+        color: #a42222;
+        font-weight: 700;
+    }
+
+    .control-label {
+        color: #2C3E50;
+        float: left;
+    }
+
+    .select-style {
+        border: 1px solid #ccc;
+        width: 60%;
+        text-align: center;
+        border-radius: 3px;
+        overflow: hidden;
+        background: #fafafa no-repeat 90% 50%;
+    }
+
+        .select-style select {
+            padding: 5px 8px;
+            width: 130%;
+            border: none;
+            box-shadow: none;
+            background: transparent;
+            background-image: none;
+            -webkit-appearance: none;
+            text-align: center;
+        }
+
+            .select-style select:focus {
+                outline: none;
+                text-align: center;
+            }
+
+    option {
+        text-align: center;
+    }
+
+    #msform input:invalid {
+        border-left-color: salmon;
+    }
+</style>
+
+<form id="msform">
+
+    <ul id="progressbar">
+        <li>Account Setup</li>
+        <li class="active">Confirm Email</li>
+        <li>Confirm Contact Phone</li>
+    </ul>
+
+    <fieldset>
+        <h2 class="fs-title">To proceed registration of account, go to the email and follow the link that you received from StudVoice.</h2>
+        <a href="https://mail.google.com/mail/#inbox">Email</a>
+    </fieldset>
+</form>

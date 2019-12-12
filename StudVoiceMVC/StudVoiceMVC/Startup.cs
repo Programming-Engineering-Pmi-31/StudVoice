@@ -58,7 +58,7 @@ namespace StudVoiceMVC
 
                 }
             );
-
+            services.AddSession();
             services.AddMvc(options =>
             {
                 options.Filters.Add(typeof(SetCurrentUserAttribute));
@@ -88,7 +88,7 @@ namespace StudVoiceMVC
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-            
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
