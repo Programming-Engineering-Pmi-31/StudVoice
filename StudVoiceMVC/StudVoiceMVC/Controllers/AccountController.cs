@@ -18,6 +18,7 @@ using System.Net.Mail;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Identity;
 using System.Net;
+using Microsoft.AspNetCore.Http;
 
 namespace StudVoiceMVC.Controllers
 {
@@ -30,7 +31,27 @@ namespace StudVoiceMVC.Controllers
             db = context;
             _signInManager = singInManager;
         }
+        public void SendSms(string user_id,string phone)
+        {
+            Random random = new Random();
+            string code = random.Next(1000, 9999).ToString();
+            //string code = "1111";
+            HttpContext.Session.SetString("Code", code);
+            TempData["user_id"] = user_id;
+            var client = new RestSharp.RestClient("https://gatewayapi.com/rest/");
+            var apiToken = "ZaKHvGQ2T3Wt4U54xF1ogYwnjWZLx91aM69pXey7jfs71NQpkuPEIJIAWMNFLQC8";
 
+            client.Authenticator = new RestSharp.Authenticators
+                .HttpBasicAuthenticator(apiToken, "");
+            var request = new RestSharp.RestRequest("mtsms", RestSharp.Method.POST);
+            request.AddJsonBody(new
+            {
+                sender = "StudVoice",
+                message = "Enter this code to login :"+code,
+                recipients = new[] { new { msisdn = phone } }
+            });
+            var response = client.Execute(request);
+        }
         [HttpGet]
         public IActionResult Login()
         {
@@ -54,32 +75,12 @@ namespace StudVoiceMVC.Controllers
                     if (!user.EmailConfirmed)
                     {
                         ModelState.AddModelError("", "You haven`t confirmed email. Please, follow the link that that you received on email box from StudVoice");
+                        return View("Login1",model);
                     }
-                    Teacher t = db.Teachers.FirstOrDefault(x => x.UserId == user.Id);
-                    if (t != null)
-                    {
-                        var claims = new List<Claim>
-                        {
-                            new Claim(ClaimsIdentity.DefaultNameClaimType, t.Name),
-                            new Claim(ClaimsIdentity.DefaultRoleClaimType,"Teacher")
-                        };
-                        ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, "Teacher");
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+                    string phone = db.Contacts.FirstOrDefault(x => x.Email == model.Login).Phone;
+                    SendSms(user.Id, phone);
+                    return RedirectToAction("VerificatePhone");
 
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        var claims = new List<Claim>
-                        {
-                            new Claim(ClaimsIdentity.DefaultNameClaimType, user.Name),
-                            new Claim(ClaimsIdentity.DefaultRoleClaimType,"Student")
-                        };
-                        ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, "Student");
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-                        
-                        return RedirectToAction("Index", "Home");
-                    }
 
                 }
                 ModelState.AddModelError("", "Invalid Email or Password");
@@ -110,31 +111,12 @@ namespace StudVoiceMVC.Controllers
                     if(!user.EmailConfirmed)
                     {
                         ModelState.AddModelError("", "You haven`t confirmed email. Please, follow the link that that you received on email box from StudVoice");
+                        return View("Login", model);
                     }
-                    Teacher t = db.Teachers.FirstOrDefault(x => x.UserId == user.Id);
-                    if (t!=null)
-                    {
-                        var claims = new List<Claim>
-                        {
-                            new Claim(ClaimsIdentity.DefaultNameClaimType, t.Name)
-                        };
-                        ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, "Teacher");
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-                        
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        var claims = new List<Claim>
-                        {
-                            new Claim(ClaimsIdentity.DefaultNameClaimType, user.Name)
-                        };
-                        ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, "Student");
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-                        
-                        return RedirectToAction("Index", "Home");
-                    }
-                  
+                    string phone = db.Contacts.FirstOrDefault(x => x.Email == model.Login).Phone;
+                    SendSms(user.Id, phone);
+                    return RedirectToAction("VerificatePhone");
+
                 }
                 ModelState.AddModelError("", "Invalid Email or Password");
             }
@@ -326,6 +308,8 @@ namespace StudVoiceMVC.Controllers
                 User user = db.Users.FirstOrDefault(x => x.Id == user_id && x.Email == email && x.ConcurrencyStamp == email_id);
                 if(user!=null)
                 {
+                    user.EmailConfirmed = true;
+                    db.SaveChanges();
                     return RedirectToAction("LoginProceed");
                 }
                 else
@@ -337,6 +321,55 @@ namespace StudVoiceMVC.Controllers
             {
                 return View("Error");
             }
+        }
+
+        public IActionResult VerificatePhone()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> VerificatePhone(string user_id,string code)
+        {
+            if(TempData["user_id"]!=null)
+            {
+                user_id = TempData["user_id"].ToString();
+            }
+            else
+            {
+                return View("Error");
+            }
+            code = Request.Form["code"];
+            string generated_code = HttpContext.Session.GetString("Code");
+            User user = db.Users.FirstOrDefault(x => x.Id == user_id);
+            if (generated_code==code)
+            {
+                Teacher t = db.Teachers.FirstOrDefault(x => x.UserId == user.Id);
+                if (t != null)
+                {
+                    var claims = new List<Claim>
+                        {
+                            new Claim(ClaimsIdentity.DefaultNameClaimType, t.Name),
+                            new Claim(ClaimsIdentity.DefaultRoleClaimType,"Teacher")
+                        };
+                    ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, "Teacher");
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    var claims = new List<Claim>
+                        {
+                            new Claim(ClaimsIdentity.DefaultNameClaimType, user.Name),
+                            new Claim(ClaimsIdentity.DefaultRoleClaimType,"Student")
+                        };
+                    ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, "Student");
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return View("Error");
         }
     }
 }
