@@ -47,12 +47,12 @@ namespace StudVoiceMVC.Controllers
         {
             return View("~/Views/Teacher/Lesson/CreateLessonView.cshtml",new LessonDTO() { TeacherId = teacherid});
         }
-       
-        //public async void AddLesson(LessonDTO lessonDTO)
-        //{
-        //    var res =await _lessonService.CreateAsync(lessonDTO);
-        //    Lesson(res.Id);
-        //}
+
+        public async Task<IActionResult> AddLesson(LessonDTO ls)
+        {
+            var lesson = await _lessonService.CreateAsync(ls);
+            return View("~/Views/Teacher/Lesson/LessonView.cshtml", lesson);
+        }
 
         public async Task<IActionResult> Lesson(int id)
         {

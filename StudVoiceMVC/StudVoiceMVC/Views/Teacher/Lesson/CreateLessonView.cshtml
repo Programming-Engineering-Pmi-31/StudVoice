@@ -4,50 +4,56 @@
     ViewData["Title"] = "CreateLessonView";
 }
 
-<h1>CreateLessonView</h1>
+<div class="create-lesson-container">
+    <div class="teacher-header">
+        <a asp-action="Index" asp-controller="Home">
+            <img src="~/Content/images/back.svg" width="30px" />
+        </a>
+        <h4> Create Lesson</h4>
+    </div>
 
-<h4>Lesson</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateLessonForm">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="TeacherId" class="control-label"></label>
-                <input asp-for="TeacherId" disabled="disabled" class="form-control" />
-                <span asp-validation-for="TeacherId" class="text-danger"></span>
+    <hr />
+
+    <div class="container row new-lesson-container">
+        <form asp-action="AddLesson" asp-controller="Home" class="container row  flex-column">
+            <div class="row data-container">
+                <div class="col-6 input-container">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="col-form-label-sm">Please write down the subject title</label>
+                        <input asp-for="Name" required class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DateTime" class="col-form-label-sm">Choose date and time of the lesson</label>
+                        <input asp-for="DateTime" required class="form-control" value="DateTime.Now"/>
+                        <span asp-validation-for="DateTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Theme" class="col-form-label-sm">Write the theme of the lesson</label>
+                        <input asp-for="Theme" required class="form-control" />
+                        <span asp-validation-for="Theme" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6 description-container">
+                    <div class="form-group description-container">
+                        <label asp-for="Description" class="col-form-label-sm">Overall lesson description</label>
+                        <textarea asp-for="Description" required class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <input hidden asp-for="TeacherId" value="@Model.TeacherId"/>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateTime" class="control-label"></label>
-                <input asp-for="DateTime" class="form-control" />
-                <span asp-validation-for="DateTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Theme" class="control-label"></label>
-                <input asp-for="Theme" class="form-control" />
-                <span asp-validation-for="Theme" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="row ">
+                <div class="form-group col-12">
+                    <input type="submit" value="Create" class="btn btn-primary float-left" />
+                </div>
             </div>
         </form>
+
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
