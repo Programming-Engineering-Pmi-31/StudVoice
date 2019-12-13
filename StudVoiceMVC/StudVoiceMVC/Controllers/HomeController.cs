@@ -10,6 +10,7 @@ using StudVoice.BLL.DTOs;
 using System.Collections.Generic;
 using StudVoice.BLL.Services.Interfaces;
 using StudVoice.BLL.Factories;
+using StudVoice.DAL.Repositories;
 using System.Threading.Tasks;
 
 namespace StudVoiceMVC.Controllers
@@ -36,10 +37,33 @@ namespace StudVoiceMVC.Controllers
             return View();
         }
 
+        // "false" - lesson , "true" - teacher
+        public async Task<IActionResult> Feedback( int relatedId, bool type)
+        {
+            ViewBag.RelatedId = relatedId;
+            if (type)
+            {
+                ViewBag.TeacherName = _teacherService.GetAsync(relatedId).Result.Name;
+                return View("~/Views/Feedback/TeacherFeedback.cshtml");
+            }
+            ViewBag.LessonTitle = _lessonService.GetAsync(relatedId).Result.Name;
+            return View("~/Views/Feedback/LessonFeedback.cshtml");
+        }
+
+        public async Task<IActionResult> LessonFeedback(LessonFeedbackDTO model)
+        {
+            return View("~/Views/Teacher/Lesson/LessonView.cshtml", model);
+        }
+
+        public async Task<IActionResult> TeacherFeedback(TeacherFeedbackDTO model)
+        {
+            return View("~/Views/Teacher/Lesson/LessonView.cshtml", model);
+        }
+
         public async Task<IActionResult> Teacher(int id)
         {
             var teacherDTO = await _teacherService.GetAsync(id);
-            teacherDTO.QrCode = QrCode(this.Url.Action("Teacher", "Home", new { id = id }, this.Request.Scheme));
+            teacherDTO.QrCode = QrCode(this.Url.Action("Feedback", "Home", new {type = true, relatedId = id }, this.Request.Scheme));
             return View("~/Views/Teacher/TeacherView.cshtml", teacherDTO);
         }
 
@@ -57,7 +81,7 @@ namespace StudVoiceMVC.Controllers
         public async Task<IActionResult> Lesson(int id)
         {
             var lessonDTO = await _lessonService.GetAsync(id);
-            lessonDTO.QrCode = QrCode(this.Url.Action("Lesson", "Home", new { id = lessonDTO.Id }, this.Request.Scheme));
+            lessonDTO.QrCode = QrCode(this.Url.Action("Feedback", "Home", new { type = true, relatedId = lessonDTO.Id }, this.Request.Scheme));
             return View("~/Views/Teacher/Lesson/LessonView.cshtml", lessonDTO);
         }
 

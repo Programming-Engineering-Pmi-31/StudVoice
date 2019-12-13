@@ -1,0 +1,44 @@
+﻿@model StudVoice.BLL.DTOs.LessonFeedbackDTO
+
+@{
+    ViewData["Title"] = "LessonFeedback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="create-feedback-container container">
+    <div class="teacher-header">
+        <a asp-action="Index" asp-controller="Home">
+            <img src="~/Content/images/back.svg" width="30px" />
+        </a>
+        <h4> Feedback on @ViewBag.LessonTitle</h4>
+    </div>
+
+    <hr />
+
+    <div class="container row new-feedback-container">
+        <form asp-action="LessonFeedback" asp-controller="Home" class="container row  flex-column">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input hidden value="@ViewBag.RelatedId" asp-for="LessonId" class="form-control" />
+                <span asp-validation-for="LessonId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Point" class="control-label"></label>
+                <input min="0.0" max="10.0" asp-for="Point" class="form-control" asp-items="ViewBag.LessonId" />
+                <span asp-validation-for="Point" class="text-danger"></span>
+            </div>
+            <div class="form-group flex-grow-1 feedback-container">
+                <label asp-for="FeedBack" class="control-label">Leave your feedback about lesson here:</label>
+                <textarea required id="FeedBack" asp-for="FeedBack" class="form-control"></textarea>
+                <span asp-validation-for="FeedBack" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

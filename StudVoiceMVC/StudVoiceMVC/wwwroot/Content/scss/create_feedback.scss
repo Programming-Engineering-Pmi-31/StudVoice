@@ -1,0 +1,30 @@
+﻿@import "variables.scss";
+
+.create-feedback-container {
+    height: 80vh;
+
+    .new-feedback-container {
+        height: 100%;
+
+        form {
+            height: 100%;
+
+            .form-group {
+                margin: 0;
+            }
+
+            label {
+                height: 10%;
+            }
+
+            #FeedBack {
+                width: 100%;
+                height: 75%;
+                -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+                -moz-box-sizing: border-box; /* Firefox, other Gecko */
+                box-sizing: border-box; /* Opera/IE 8+ */
+                resize: none;
+            }
+        }
+    }
+}
