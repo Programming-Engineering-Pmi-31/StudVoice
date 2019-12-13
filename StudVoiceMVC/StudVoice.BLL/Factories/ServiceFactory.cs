@@ -11,6 +11,8 @@ namespace StudVoice.BLL.Factories
         private IUserService _userService;
         private ITeacherService _teacherService;
         private ILessonService _lessonService;
+        private ITeacherFeedbackService _teacherFeedbackService;
+        private ILessonFeedbackService _lessonFeedbackService;
 
         public ServiceFactory(IServiceProvider serviceProvider)
         {
@@ -24,5 +26,9 @@ namespace StudVoice.BLL.Factories
         public ITeacherService TeacherService => _teacherService ?? (_teacherService = _serviceProvider.GetService<ITeacherService>());
 
         public ILessonService LessonService => _lessonService ?? (_lessonService = _serviceProvider.GetService<ILessonService>());
+
+        public ILessonFeedbackService LessonFeedbackService => _lessonFeedbackService ?? (_lessonFeedbackService = _serviceProvider.GetService<ILessonFeedbackService>());
+
+        public ITeacherFeedbackService TeacherFeedbackService => _teacherFeedbackService ?? (_teacherFeedbackService = _serviceProvider.GetService<ITeacherFeedbackService>());
     }
 }

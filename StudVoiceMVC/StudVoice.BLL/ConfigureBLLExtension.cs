@@ -26,6 +26,8 @@ namespace StudVoice.BLL
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<ILessonService, LessonService>();
+            services.AddScoped<ITeacherFeedbackService, TeacherFeedbackService>();
+            services.AddScoped<ILessonFeedbackService, LessonFeedbackService>();
         }
 
         private static void ConfigureAutoMapper(this IServiceCollection services)

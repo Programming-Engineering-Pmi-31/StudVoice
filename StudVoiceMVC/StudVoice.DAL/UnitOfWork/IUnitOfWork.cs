@@ -11,7 +11,7 @@ namespace StudVoice.DAL.UnitOfWork
         ILessonRepository LessonRepository { get; }
         ILessonFeedbackRepository LessonFeedbackRepository { get; }
         ITeacherRepository TeacherRepository { get; }
-        ITeacherFeedbackRepository TeacherFeedback { get; }
+        ITeacherFeedbackRepository TeacherFeedbackRepository { get; }
         IUserRepository UserRepository { get; }
         UserManager<User> UserManager { get; }
         RoleManager<Role> RoleManager { get; }

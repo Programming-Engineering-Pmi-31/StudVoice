@@ -47,7 +47,7 @@ namespace StudVoice.DAL.UnitOfWork
             _lessonFeedbackRepository ?? (_lessonFeedbackRepository = _serviceProvider.GetService<ILessonFeedbackRepository>());
         public ITeacherRepository TeacherRepository =>
             _teacherRepository ?? (_teacherRepository = _serviceProvider.GetService<ITeacherRepository>());
-        public ITeacherFeedbackRepository TeacherFeedback =>
+        public ITeacherFeedbackRepository TeacherFeedbackRepository =>
             _teacherFeedbackRepository ?? (_teacherFeedbackRepository = _serviceProvider.GetService<ITeacherFeedbackRepository>());
         public IUserRepository UserRepository =>
             _userRepository ?? (_userRepository = _serviceProvider.GetService<IUserRepository>());
@@ -55,6 +55,7 @@ namespace StudVoice.DAL.UnitOfWork
             _userManager ?? (_userManager = _serviceProvider.GetService<UserManager<User>>());
         public RoleManager<Role> RoleManager =>
             _roleManager ?? (_roleManager = _serviceProvider.GetService<RoleManager<Role>>());
+
 
         public Task<int> SaveAsync()
         {
