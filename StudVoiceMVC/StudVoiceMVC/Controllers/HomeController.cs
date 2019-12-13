@@ -8,6 +8,7 @@ using System.IO;
 using StudVoice.BLL.DTOs;
 using StudVoice.BLL.Services.Interfaces;
 using StudVoice.BLL.Factories;
+using StudVoice.DAL.Repositories;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using StudVoice.DAL;
@@ -38,6 +39,29 @@ namespace StudVoiceMVC.Controllers
             return View();
         }
 
+        // "false" - lesson , "true" - teacher
+        public async Task<IActionResult> Feedback( int relatedId, bool type)
+        {
+            ViewBag.RelatedId = relatedId;
+            if (type)
+            {
+                ViewBag.TeacherName = _teacherService.GetAsync(relatedId).Result.Name;
+                return View("~/Views/Feedback/TeacherFeedback.cshtml");
+            }
+            ViewBag.LessonTitle = _lessonService.GetAsync(relatedId).Result.Name;
+            return View("~/Views/Feedback/LessonFeedback.cshtml");
+        }
+
+        public async Task<IActionResult> LessonFeedback(LessonFeedbackDTO model)
+        {
+            return View("~/Views/Teacher/Lesson/LessonView.cshtml", model);
+        }
+
+        public async Task<IActionResult> TeacherFeedback(TeacherFeedbackDTO model)
+        {
+            return View("~/Views/Teacher/Lesson/LessonView.cshtml", model);
+        }
+
         public async Task<IActionResult> Teacher(string name)
         {
             var t = await _teacherService.GetAsyncNameAsync(name);
@@ -60,7 +84,7 @@ namespace StudVoiceMVC.Controllers
         public async Task<IActionResult> Lesson(int id)
         {
             var lessonDTO = await _lessonService.GetAsync(id);
-            lessonDTO.QrCode = QrCode(this.Url.Action("Lesson", "Home", new { id = lessonDTO.Id }, this.Request.Scheme));
+            lessonDTO.QrCode = QrCode(this.Url.Action("Feedback", "Home", new { type = true, relatedId = lessonDTO.Id }, this.Request.Scheme));
             return View("~/Views/Teacher/Lesson/LessonView.cshtml", lessonDTO);
         }
 
