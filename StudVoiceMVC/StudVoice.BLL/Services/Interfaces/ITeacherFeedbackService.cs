@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StudVoice.BLL.Services.Interfaces
 {
-    interface ITeacherFeedbackService :ICrudService<TeacherFeedbackDTO>
+    public interface ITeacherFeedbackService :ICrudService<TeacherFeedbackDTO>
     {
     }
 }

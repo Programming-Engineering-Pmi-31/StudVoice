@@ -19,12 +19,16 @@ namespace StudVoiceMVC.Controllers
     {
         private readonly ITeacherService _teacherService;
         private readonly ILessonService _lessonService;
+        private readonly ILessonFeedbackService _lessonFeedbackService;
+        private readonly ITeacherFeedbackService _teacherFeedbackService;
 
 
         public HomeController(IServiceFactory serviceFactory)
         {
             _teacherService = serviceFactory.TeacherService;
             _lessonService = serviceFactory.LessonService;
+            _teacherFeedbackService = serviceFactory.TeacherFeedbackService;
+            _lessonFeedbackService = serviceFactory.LessonFeedbackService;
         }
 
         public IActionResult Index()
@@ -52,12 +56,16 @@ namespace StudVoiceMVC.Controllers
 
         public async Task<IActionResult> LessonFeedback(LessonFeedbackDTO model)
         {
-            return View("~/Views/Teacher/Lesson/LessonView.cshtml", model);
+            await _lessonFeedbackService.CreateAsync(model);
+
+            return await Lesson(model.LessonId);
         }
 
         public async Task<IActionResult> TeacherFeedback(TeacherFeedbackDTO model)
         {
-            return View("~/Views/Teacher/Lesson/LessonView.cshtml", model);
+            await _teacherFeedbackService.CreateAsync(model);
+
+            return await Teacher(model.TeacherId);
         }
 
         public async Task<IActionResult> Teacher(int id)

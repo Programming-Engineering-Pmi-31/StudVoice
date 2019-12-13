@@ -8,5 +8,7 @@ namespace StudVoice.BLL.Factories
         ILessonService LessonService { get; }
         ITeacherService TeacherService { get; }
         IUserService UserService { get; }
+        ITeacherFeedbackService TeacherFeedbackService { get; }
+        ILessonFeedbackService LessonFeedbackService { get; }
     }
 }
