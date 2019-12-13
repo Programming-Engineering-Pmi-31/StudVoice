@@ -42,7 +42,7 @@ namespace StudVoiceMVC.Controllers
         {
             var t = await _teacherService.GetAsyncNameAsync(name);
             var teacherDTO = await _teacherService.GetAsync(t.Id);
-            teacherDTO.QrCode = QrCode(this.Url.Action("Teacher", "Home", new { id = teacherDTO.id }, this.Request.Scheme));
+            teacherDTO.QrCode = QrCode(this.Url.Action("Teacher", "Home", new { id = teacherDTO.Id }, this.Request.Scheme));
             return View("~/Views/Teacher/TeacherView.cshtml", teacherDTO);
         }
 
